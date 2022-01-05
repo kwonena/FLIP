@@ -1,0 +1,50 @@
+@value makerBlue,makerBackground from '../../common/colors.css';
+
+.login {
+    width: 100%;
+    height: 90vh;
+    background-color: makerBackground;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0.5rem;
+}
+
+.item {
+    list-style: none;
+}
+
+.githubBtn,
+.googleBtn {
+    width: 40%;
+    height: 3.8em;
+    font-size: 1.2rem;
+    border-radius: 1.4rem;
+    margin-bottom: 1.2em;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+}
+
+.githubBtn {
+    background-color: #616161;
+    color: white;
+}
+
+.googleBtn {
+    background-color: white;
+}

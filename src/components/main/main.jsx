@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
 //import styles from "./main.module.css";
 
 const Main = (props) => {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -17,13 +19,23 @@ const Main = (props) => {
               <br />
               지식을 검증해보고 싶다면?
             </span>
-            <button className={styles.quizBtn}>퀴즈 풀러 가기</button>
+            <button
+              className={styles.quizBtn}
+              onClick={() => navigate("/quizSolve")}
+            >
+              퀴즈 풀러 가기
+            </button>
           </div>
         </div>
         <div className={styles.study}>
           <div className={styles.studyBox}>
             <span className={styles.studyText}>학습 중</span>
-            <button className={styles.studyBtn}>문제집 추가</button>
+            <button
+              className={styles.studyBtn}
+              onClick={() => navigate("/addBook")}
+            >
+              문제집 추가
+            </button>
           </div>
           <div className={styles.cards}>카드 컴포넌트 들어갈 자리</div>
         </div>
