@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./main.module.css";
@@ -7,6 +7,18 @@ import styles from "./main.module.css";
 
 const Main = (props) => {
   const navigate = useNavigate();
+  const [books, setBooks] = useState({
+    1: {
+      id: "1",
+      title: "첫번째 문제집",
+      cards: "0",
+    },
+    2: {
+      id: "2",
+      title: "두번째 문제집",
+      cards: "0",
+    },
+  });
   return (
     <>
       <Header />
