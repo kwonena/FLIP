@@ -93,3 +93,8 @@
     width: 60%;
     margin-top: 2em;
 }
+
+.quizBtn:hover,
+.studyBtn:hover {
+   opacity: 0.9;
+}
