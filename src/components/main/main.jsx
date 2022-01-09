@@ -1,24 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Books from "../books/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
-//import styles from "./main.module.css";
-
 const Main = (props) => {
   const navigate = useNavigate();
-  const [books, setBooks] = useState({
-    1: {
+  const [books, setBooks] = useState([
+    {
       id: "1",
       title: "첫번째 문제집",
       cards: "0",
     },
-    2: {
+    {
       id: "2",
       title: "두번째 문제집",
       cards: "0",
     },
-  });
+    {
+      id: "2",
+      title: "두번째 문제집",
+      cards: "0",
+    },
+    {
+      id: "2",
+      title: "두번째 문제집",
+      cards: "0",
+    },
+  ]);
+
   return (
     <>
       <Header />
@@ -33,7 +43,10 @@ const Main = (props) => {
             </span>
             <button
               className={styles.quizBtn}
-              onClick={() => navigate("/quizSolve")}
+              onClick={() => {
+                navigate("/quizSolve");
+                setBooks(...books);
+              }}
             >
               퀴즈 풀러 가기
             </button>
@@ -49,7 +62,9 @@ const Main = (props) => {
               문제집 추가
             </button>
           </div>
-          <div className={styles.cards}>카드 컴포넌트 들어갈 자리</div>
+          <div className={styles.books}>
+            <Books books={books} />
+          </div>
         </div>
       </section>
     </>

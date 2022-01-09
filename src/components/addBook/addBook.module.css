@@ -10,7 +10,7 @@
     background-color: makerBackground;
 }
 
-.titleBox {
+.titleContainer {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -21,6 +21,18 @@
     font-weight: bolder;
     font-size: larger;
     margin-bottom: 0.4rem;
+    border:none;
+    background-color:makerBackground;
+    outline: none;
+}
+
+.titleBtn {
+    cursor: pointer;
+    outline: 0;
+    border:none;
+    background-color:makerBlue;
+    color: white;
+    cursor: pointer;
 }
 
 .text {

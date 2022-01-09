@@ -7,8 +7,16 @@ const AddBook = (props) => {
     <>
       <Header />
       <section className={styles.container}>
-        <section className={styles.titleBox}>
-          <span className={styles.title}>첫번째 문제집 제목</span>
+        <section className={styles.titleContainer}>
+          <div className={styles.titleBox}>
+            <input
+              type="text"
+              className={styles.title}
+              placeholder="문제집 제목"
+              name="title"
+            />
+            <button className={styles.titleBtn}>확인</button>
+          </div>
           <span className={styles.text}>0개의 카드를 학습 중이에요.</span>
           <div className={styles.buttons}>
             <button className={styles.newBtn}>최신순</button>

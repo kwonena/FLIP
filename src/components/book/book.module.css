@@ -1,0 +1,39 @@
+li {
+    list-style: none;
+}
+
+.item {
+    width: 40%;
+    margin: 0.8rem;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 9em;
+    border-radius: 1.2em;
+    background-color: white;
+    box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+}
+
+.bookTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bookCount {
+    color: darkgrey;
+}
+
+.bookFooter {
+    text-align: end;
+}
+
+i {
+    cursor: pointer;
+}
+
+.bookDelete {
+    color: red;
+}
