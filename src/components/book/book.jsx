@@ -7,7 +7,9 @@ const Book = ({ book }) => {
         <li className={styles.item}>
             <section>
                 <div className={styles.bookTitle}>{book.title}</div>
-                <div className={styles.bookCount}>{book.cards}개의 카드</div>
+                <div className={styles.bookCount}>
+                    {book.cards.length}개의 카드
+                </div>
             </section>
             <footer className={styles.bookFooter}>
                 <i>수정 </i>
