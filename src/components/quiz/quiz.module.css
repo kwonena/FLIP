@@ -1,0 +1,27 @@
+@value makerBlue,makerBackground from '../../common/colors.css';
+
+.container {
+    padding: 8em;
+    height: 90vh;
+    background-color: makerBackground;
+    text-align: center;
+}
+
+.cardText {
+    width: 60%;
+    margin: auto;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.card {
+    margin-top: 1em;
+    width: 60%;
+    margin: auto;
+}
+
+.cardPage {
+    margin-top: 1em;
+    width: 60%;
+    margin: auto;
+}

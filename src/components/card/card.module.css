@@ -1,0 +1,17 @@
+button {
+    cursor: pointer;
+    height: 14em;
+    width: 100%;
+    border-style: none;
+    border-radius: 1.2em;
+    background-color: white;
+    box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+}
+
+.cardFront {
+}
+
+.cardBack {
+}
