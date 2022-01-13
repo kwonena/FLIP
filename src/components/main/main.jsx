@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import WorkBooks from '../../service/workbooks';
 import Books from '../books/books';
 import Header from '../header/header';
 import styles from './main.module.css';
 
 const Main = (props) => {
-    const workBooks = new WorkBooks();
-
     const navigate = useNavigate();
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-        workBooks
-            .showBooks() //
-            .then((items) => {
-                setBooks(items);
-            });
-    }, []);
-
     return (
         <>
             <Header />
@@ -51,7 +39,7 @@ const Main = (props) => {
                         </button>
                     </div>
                     <div className={styles.books}>
-                        <Books books={books} />
+                        <Books books={props.books} footerShow={true} />
                     </div>
                 </div>
             </section>

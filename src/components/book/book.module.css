@@ -27,8 +27,12 @@ li {
     color: darkgrey;
 }
 
-.bookFooter {
+.bookFooter.show {
     text-align: end;
+}
+
+.bookFooter.hidden {
+    display: none;
 }
 
 i {
