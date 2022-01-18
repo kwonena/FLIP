@@ -6,7 +6,7 @@ import Main from './components/main/main';
 import AddBook from './components/addBook/addBook';
 import QuizSolve from './components/quizSolve/quizSolve';
 import Quiz from './components/quiz/quiz';
-import WorkBooks from './service/workbooks';
+import WorkBooks from './API/workbooks';
 
 function App() {
     const workBooks = new WorkBooks();
@@ -15,6 +15,7 @@ function App() {
         workBooks
             .showBooks() //
             .then((items) => {
+                console.log(items);
                 setBooks(items);
             });
     }, []);
