@@ -1,4 +1,5 @@
-button {
+.cardFront,
+.cardBack {
     cursor: pointer;
     height: 14em;
     width: 100%;
