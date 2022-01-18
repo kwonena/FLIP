@@ -1,15 +1,14 @@
-li {
-    list-style: none;
+.container {
+    padding: 0.4rem;
+    width: 50%;
 }
 
 .item {
-    width: 40%;
-    margin: 0.8rem;
-    padding: 2em;
+    padding: 1.8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 9em;
+    height: 12em;
     border-radius: 1.2em;
     background-color: white;
     box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
