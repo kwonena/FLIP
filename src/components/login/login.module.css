@@ -7,27 +7,29 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
 .list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0.5rem;
+    width: 60%;
 }
 
 .item {
-    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.githubBtn,
-.googleBtn {
-    width: 40%;
-    height: 3.8em;
+.id,
+.password {
+    width: 32rem;
+    height: 3.5rem;
+    border-radius: 0.8rem;
     font-size: 1.2rem;
-    border-radius: 1.4rem;
+    padding-left: 1.2rem;
     margin-bottom: 1.2em;
     background-color: transparent;
     cursor: pointer;
@@ -40,11 +42,23 @@
     -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
 }
 
-.githubBtn {
-    background-color: #616161;
+.button {
+    background-color: makerBlue;
     color: white;
+    width: 33.7rem;
+    height: 3.5rem;
+    border-radius: 0.8rem;
+    font-size: larger;
+    font-weight: bolder;
 }
 
-.googleBtn {
-    background-color: white;
+.sign {
+    margin-left: 28rem;
+    margin-top: 1rem;
+    font-weight: bolder;
+    font-size: large;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    background-color: makerBackground;
 }
