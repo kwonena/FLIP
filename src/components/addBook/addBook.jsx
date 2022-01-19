@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./addBook.module.css";
 import Header from "../header/header";
+import AddCard from "../addCard/addCard";
 
-const AddBook = (props) => {
+const AddBook = () => {
+  const [popOpen, setPopOpen] = useState(false);
+
+  const openPop = () => {
+    setPopOpen(true);
+  };
+  const closePop = () => {
+    setPopOpen(false);
+  };
+
   return (
     <>
       <Header />
@@ -23,7 +33,10 @@ const AddBook = (props) => {
             <button className={styles.starBtn}>즐겨찾기순</button>
           </div>
         </section>
-        <button className={styles.addCardBtn}>새로운 카드 추가하기</button>
+        <button className={styles.addCardBtn} onClick={openPop}>
+          새로운 카드 추가하기
+        </button>
+        <AddCard open={popOpen} close={closePop} />
       </section>
     </>
   );
