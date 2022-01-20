@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Books from '../books/books';
+import Books from '../mainBooks/books';
 import Header from '../header/header';
 import styles from './main.module.css';
 
@@ -39,7 +39,7 @@ const Main = (props) => {
                         </button>
                     </div>
                     <div className={styles.books}>
-                        <Books books={props.books} footerShow={true} />
+                        <Books books={props.books} />
                     </div>
                 </div>
             </section>

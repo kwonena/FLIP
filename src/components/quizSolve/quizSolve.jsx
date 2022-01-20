@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Books from '../books/books';
 import Header from '../header/header';
+import QuizBooks from '../quizBooks/quiz_books';
 import styles from './quizSolve.module.css';
 
 // header에서 로그인 안 보이게
@@ -15,7 +15,7 @@ const QuizSolve = (props) => {
                     <h1>퀴즈설정</h1>
                     <span>어떤 문제를 풀어볼까요?</span>
                     <div className={styles.quizBooks}>
-                        <Books books={props.books} footerShow={false} />
+                        <QuizBooks books={props.books} />
                     </div>
                 </div>
                 <div className={styles.quizSelect}>
