@@ -1,22 +1,15 @@
-import React, { useState } from "react";
-import ReactCardFlip from "react-card-flip";
+import React from "react";
 import styles from "./card.module.css";
 
 const Card = ({ card }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
   return (
-    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-      <button className={styles.cardFront} onClick={handleClick}>
+    <>
+      <button className={styles.cardFront}>
         <div className={styles.cardName}>{card.question}</div>
         <div className={styles.cardContent}>{card.result}</div>
       </button>
-      <button className={styles.cardBack} onClick={handleClick}>
-        A.문제 답 어쩌구
-      </button>
-    </ReactCardFlip>
+      <button className={styles.cardBack}>A.문제 답 어쩌구</button>
+    </>
   );
 };
 
