@@ -10,8 +10,8 @@ const Card = ({ card }) => {
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
       <button className={styles.cardFront} onClick={handleClick}>
-        <div className={styles.cardName}>{card.question}문제집 이름</div>
-        <div className={styles.cardContent}>{card.result}Q.문제 왈라오알랑</div>
+        <div className={styles.cardName}>{card.question}</div>
+        <div className={styles.cardContent}>{card.result}</div>
       </button>
       <button className={styles.cardBack} onClick={handleClick}>
         A.문제 답 어쩌구

@@ -10,9 +10,13 @@ const Book = ({ book, loadCards }) => {
       className={styles.container}
       onClick={() => {
         console.log("book");
-        navigate("/addBook");
-        loadCards(book.id);
-        console.log("hh");
+        navigate("/addBook", {
+          state: {
+            id: book.id,
+            title: book.title,
+            cards: book.cards,
+          },
+        });
       }}
     >
       <div className={styles.item}>
