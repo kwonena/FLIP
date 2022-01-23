@@ -11,10 +11,10 @@ class WorkBooks {
         });
     }
 
-    async showBooks() {
+    async showBooks(page) {
         const response = await this.workBooks.get('workbooks', {
             params: {
-                page: 1,
+                page: page,
                 limit: 4,
             },
         });

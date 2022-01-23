@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../header/header';
 import QuizBooks from '../quizBooks/quiz_books';
@@ -7,6 +7,21 @@ import styles from './quizSolve.module.css';
 // header에서 로그인 안 보이게
 const QuizSolve = (props) => {
     const navigate = useNavigate();
+
+    const [page, setPage] = useState(1);
+
+    const handleNext = () => {
+        const nextPage = page + 1;
+        setPage(nextPage);
+        props.onShowBooks(nextPage);
+    };
+
+    const handlePrev = () => {
+        const prevPage = page - 1;
+        setPage(prevPage);
+        props.onShowBooks(prevPage);
+    };
+
     return (
         <>
             <Header />
@@ -15,7 +30,12 @@ const QuizSolve = (props) => {
                     <h1>퀴즈설정</h1>
                     <span>어떤 문제를 풀어볼까요?</span>
                     <div className={styles.quizBooks}>
-                        <QuizBooks books={props.books} />
+                        <QuizBooks
+                            books={props.books}
+                            page={page}
+                            handleNext={handleNext}
+                            handlePrev={handlePrev}
+                        />
                     </div>
                 </div>
                 <div className={styles.quizSelect}>

@@ -1,9 +1,45 @@
+@value makerBlue from '../../common/colors.css';
+
+.container {
+    display: grid;
+    grid-auto-flow: column;
+    /* grid-template-columns: 0.5fr 9fr 0.5fr; */
+    align-items: center;
+}
+
 .list {
-    padding-top: 2em;
-    padding-left: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: first baseline;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
     list-style: none;
+}
+
+.prevBtn {
+    margin: auto;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    border-style: none;
+    background-color: makerBlue;
+    color: white;
+}
+
+.nextBtn {
+    margin: auto;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    border-style: none;
+    background-color: makerBlue;
+    color: white;
+}
+
+button {
+    cursor: pointer;
+    transition: transform 250ms ease-in;
+}
+
+button:hover {
+    transform: scale(1.02);
 }
