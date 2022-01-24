@@ -14,11 +14,6 @@
     box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
     -webkit-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
-    transition: transform 250ms ease-in;
-}
-
-.item:hover {
-    transform: scale(1.02);
 }
 
 .bookTitle {
@@ -35,10 +30,27 @@
     text-align: end;
 }
 
-i {
-    cursor: pointer;
+.bookEdit,
+.bookDelete {
+    transition: transform 250ms ease-in;
+}
+
+.bookEdit:hover,
+.bookDelete:hover {
+    transform: scale(1.02);
+}
+.bookEdit {
+    background-color: white;
+}
+
+.bookEdit:hover {
+    color: blue;
 }
 
 .bookDelete {
+    background-color: white;
+}
+
+.bookDelete:hover {
     color: red;
 }
