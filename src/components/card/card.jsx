@@ -8,7 +8,6 @@ const Card = ({ card }) => {
         <div className={styles.cardName}>{card.question}</div>
         <div className={styles.cardContent}>{card.result}</div>
       </button>
-      <button className={styles.cardBack}>A.문제 답 어쩌구</button>
     </>
   );
 };
