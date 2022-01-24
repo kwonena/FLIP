@@ -34,12 +34,3 @@
     background-color: makerBlue;
     color: white;
 }
-
-button {
-    cursor: pointer;
-    transition: transform 250ms ease-in;
-}
-
-button:hover {
-    transform: scale(1.02);
-}

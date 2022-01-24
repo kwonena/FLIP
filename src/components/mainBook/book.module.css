@@ -33,6 +33,7 @@
 .bookEdit,
 .bookDelete {
     transition: transform 250ms ease-in;
+    color: grey;
 }
 
 .bookEdit:hover,

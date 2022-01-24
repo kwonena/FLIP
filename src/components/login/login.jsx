@@ -29,6 +29,7 @@ const Login = (props) => {
     <>
       <Header />
       <section className={styles.login}>
+        <spna className={styles.title}>LOGIN</spna>
         <ul className={styles.list}>
           <li className={styles.item}>
             <input
@@ -53,9 +54,10 @@ const Login = (props) => {
               로그인
             </button>
           </li>
-          <li className={styles.item}>
+          <div className={styles.singUp}>
+            <spna>아직 계정이 없으시다면?</spna>
             <button className={styles.sign}>회원가입</button>
-          </li>
+          </div>
         </ul>
       </section>
     </>
