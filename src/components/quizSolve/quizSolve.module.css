@@ -27,7 +27,10 @@
 }
 
 .quizStart {
-    margin: auto;
+    text-align: center;
+}
+
+.quizStartBtn {
     padding: 0.3em;
     width: 60%;
     height: 2em;
