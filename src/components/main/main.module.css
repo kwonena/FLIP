@@ -6,7 +6,7 @@
     background-color: makerBackground;
     display: flex;
     flex-direction: column;
-    padding-bottom: 5%;
+    margin-bottom: 5em;
 }
 
 .quiz {
