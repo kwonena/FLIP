@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./login.module.css";
 
 // header에서 로그인 안 보이게
 const Login = (props) => {
+  const navigate = useNavigate();
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -56,7 +58,9 @@ const Login = (props) => {
           </li>
           <div className={styles.singUp}>
             <spna>아직 계정이 없으시다면?</spna>
-            <button className={styles.sign}>회원가입</button>
+            <button className={styles.sign} onClick={() => navigate("/singUp")}>
+              회원가입
+            </button>
           </div>
         </ul>
       </section>
