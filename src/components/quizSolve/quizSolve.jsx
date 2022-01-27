@@ -1,11 +1,38 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import WorkBooks from '../../API/workbooks';
 import Header from '../header/header';
 import QuizBooks from '../quizBooks/quiz_books';
 import styles from './quizSolve.module.css';
 
 // header에서 로그인 안 보이게
 const QuizSolve = (props) => {
+    const workBooks = new WorkBooks();
+    const [books, setBooks] = useState([]); // 화면에 보여지는 문제집
+    const [nextBooks, setNextBooks] = useState([]); // 현재 보이는 다음 페이지 문제집
+    const [prevDisable, setPrevDisable] = useState(false);
+    const [nextDisable, setNextDisable] = useState(false);
+
+    const showBooks = (page) => {
+        workBooks
+            .showBooks(page) //
+            .then((items) => {
+                setBooks(items);
+            });
+    };
+    const hiddenBooks = (page) => {
+        workBooks
+            .showBooks(page + 1) //
+            .then((items) => {
+                setNextBooks(items);
+            });
+    };
+
+    useEffect(() => {
+        showBooks(1);
+        hiddenBooks(1);
+    }, []);
+
     const navigate = useNavigate();
 
     const [page, setPage] = useState(1); // 보여지는 문제집 페이징
@@ -16,14 +43,27 @@ const QuizSolve = (props) => {
     //페이징 처리를 위한 함수
     const handleNext = () => {
         const nextPage = page + 1;
-        setPage(nextPage);
-        props.onShowBooks(nextPage);
+        hiddenBooks(nextPage);
+        if (nextBooks.length == 0) {
+            alert('다음 문제집이 없어요😅');
+            setNextDisable(true);
+        } else {
+            showBooks(nextPage);
+            setPage(nextPage);
+            setPrevDisable(false);
+        }
     };
 
     const handlePrev = () => {
         const prevPage = page - 1;
-        setPage(prevPage);
-        props.onShowBooks(prevPage);
+        if (prevPage < 1) {
+            alert('다음 문제집이 없어요😅');
+            setPrevDisable(true);
+        } else {
+            showBooks(prevPage);
+            setPage(prevPage);
+            setNextDisable(false);
+        }
     };
 
     //사용자가 문제집을 선택했을 때
@@ -53,7 +93,6 @@ const QuizSolve = (props) => {
             return { title: quizBook.title, cards: quizBook.cards[idx] };
         });
         setRandomBook(randomCards);
-        // console.log(randomCards);
     };
 
     //선택된 문제집의 카드 개수만큼 option 설정
@@ -85,8 +124,9 @@ const QuizSolve = (props) => {
                     <span>어떤 문제를 풀어볼까요?</span>
                     <div className={styles.quizBooks}>
                         <QuizBooks
-                            books={props.books}
-                            page={page}
+                            books={books}
+                            prevDisable={prevDisable}
+                            nextDisable={nextDisable}
                             handleNext={handleNext}
                             handlePrev={handlePrev}
                             selectBook={selectBook}

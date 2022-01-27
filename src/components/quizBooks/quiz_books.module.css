@@ -15,6 +15,7 @@
     list-style: none;
 }
 
+.nextBtn,
 .prevBtn {
     margin: auto;
     width: 3em;
@@ -25,12 +26,13 @@
     color: white;
 }
 
-.nextBtn {
+.disableBtn {
+    cursor: default;
     margin: auto;
     width: 3em;
     height: 3em;
     border-radius: 50%;
     border-style: none;
-    background-color: makerBlue;
+    background-color: darkgray;
     color: white;
 }
