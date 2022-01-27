@@ -2,12 +2,12 @@ import React from "react";
 import Book from "../mainBook/book";
 import styles from "./books.module.css";
 
-const Books = ({ books, loadCards }) => {
+const Books = ({ books }) => {
   return (
     <>
       <ul className={styles.list}>
         {books.map((book) => (
-          <Book key={book.id} book={book} loadCards={loadCards} />
+          <Book key={book.id} book={book} />
         ))}
       </ul>
     </>
