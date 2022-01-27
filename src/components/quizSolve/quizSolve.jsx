@@ -6,15 +6,15 @@ import styles from './quizSolve.module.css';
 
 // header에서 로그인 안 보이게
 const QuizSolve = (props) => {
-    const [page, setPage] = useState(1);
-    const [quizCnt, setQuizCnt] = useState(0);
-    const [quizBook, setQuizBook] = useState([]);
-    const [randomBook, setRandomBook] = useState();
+    const [page, setPage] = useState(1); // 보여지는 문제집 페이징
+    const [quizCnt, setQuizCnt] = useState(0); // 선택된 문제집 카드 개수
+    const [quizBook, setQuizBook] = useState([]); // 사용자가 선택한 문제집
+    const [randomBook, setRandomBook] = useState(); // 기존 문제집에서 랜덤 추출한 문제집
 
+    //페이징 처리를 위한 함수
     const handleNext = () => {
         const nextPage = page + 1;
         setPage(nextPage);
-        // if(props.onShowBooks(nextPage+1) )
         props.onShowBooks(nextPage);
     };
 
@@ -24,12 +24,14 @@ const QuizSolve = (props) => {
         props.onShowBooks(prevPage);
     };
 
+    //사용자가 문제집을 선택했을 때
     const selectBook = (book) => {
         setQuizCnt(book.cards.length);
         setQuizBook(book);
     };
 
-    const selectRef = useRef();
+    //랜덤 카드 문제집 만드는 함수
+    //중복되지 않는 랜덤 index 설정
     const randomIdx = (num) => {
         const randomIdx = new Set();
         while (1) {
@@ -45,12 +47,14 @@ const QuizSolve = (props) => {
         const randomNum = selectRef.current.value;
         const random = [...randomIdx(randomNum)];
         const randomCards = random.map((idx) => {
-            return { ...quizBook, cards: quizBook.cards[idx] };
+            return { title: quizBook.title, cards: quizBook.cards[idx] };
         });
         setRandomBook(randomCards);
         // console.log(randomCards);
     };
 
+    //선택된 문제집의 카드 개수만큼 option 설정
+    const selectRef = useRef();
     const handleQuizNum = () => {
         const option = [];
         for (let i = 0; i <= quizCnt; i++) {

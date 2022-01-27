@@ -2,7 +2,33 @@ import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import styles from './quizCard.module.css';
 
-const QuizCard = (props) => {
+const QuizCard = ({ quiz }) => {
+    const [page, setPage] = useState(0);
+    const [card, setCard] = useState(quiz[page].cards); // 보여지는 카드
+
+    // 카드 페이징
+    const handleNext = () => {
+        setIsFlipped(false);
+        const next = page + 1;
+        if (next < quiz.length) {
+            setCard(quiz[next].cards);
+            setPage(next);
+        } else {
+            alert('마지막 카드 입니다!');
+        }
+    };
+
+    const handlePrev = () => {
+        setIsFlipped(false);
+        const prev = page - 1;
+        if (prev < 0) {
+            alert('첫번째 카드 입니다!');
+        } else {
+            setCard(quiz[prev].cards);
+            setPage(prev);
+        }
+    };
+
     const [isFlipped, setIsFlipped] = useState(false);
     const handleClick = () => {
         setIsFlipped(!isFlipped);
@@ -11,28 +37,19 @@ const QuizCard = (props) => {
         <section className={styles.quiz}>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
                 <button className={styles.cardFront} onClick={handleClick}>
-                    <div className={styles.cardName}>문제집 이름</div>
-                    <div className={styles.cardContent}>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Est corrupti, voluptatibus tempore deserunt, rerum
-                        sed, laborum fugiat debitis veritatis nobis modi iste
-                        placeat adipisci ipsam. Delectus accusantium quas cumque
-                        recusandae. In autem mollitia amet a, id itaque dolores
-                        doloremque magnam deleniti aperiam ipsa sequi aut libero
-                        dolor odit assumenda excepturi iste at ex tempora. Ex
-                        aliquam sint error esse quos?
-                    </div>
+                    <div className={styles.cardName}>{quiz[page].title}</div>
+                    <div className={styles.cardContent}>{card.question}</div>
                 </button>
                 <button className={styles.cardBack} onClick={handleClick}>
-                    Lorem ipsum dolor sit.
+                    {card.result}
                 </button>
             </ReactCardFlip>
             <span className={styles.cardPage}>
-                <button>
+                <button onClick={handlePrev}>
                     <i className="fas fa-arrow-left"></i>
                 </button>
-                1 / 10
-                <button>
+                {page + 1} / {quiz.length}
+                <button onClick={handleNext}>
                     <i className="fas fa-arrow-right"></i>
                 </button>
             </span>

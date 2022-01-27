@@ -6,7 +6,7 @@ import styles from './quiz.module.css';
 
 const Quiz = (props) => {
     const location = useLocation();
-    console.log(location.state.quiz);
+
     return (
         <>
             <Header />
@@ -16,7 +16,7 @@ const Quiz = (props) => {
                         카드를 클릭해 정답 확인
                     </span>
                     <div className={styles.card}>
-                        <QuizCard />
+                        <QuizCard quiz={location.state.quiz} />
                     </div>
                 </section>
             </div>
