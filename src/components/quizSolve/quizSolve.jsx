@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../header/header';
 import QuizBooks from '../quizBooks/quiz_books';
 import styles from './quizSolve.module.css';
 
 // header에서 로그인 안 보이게
 const QuizSolve = (props) => {
+    const navigate = useNavigate();
+
     const [page, setPage] = useState(1); // 보여지는 문제집 페이징
     const [quizCnt, setQuizCnt] = useState(0); // 선택된 문제집 카드 개수
     const [quizBook, setQuizBook] = useState([]); // 사용자가 선택한 문제집
@@ -35,10 +37,11 @@ const QuizSolve = (props) => {
     const randomIdx = (num) => {
         const randomIdx = new Set();
         while (1) {
-            let randomNum = Math.floor(Math.random() * quizCnt);
-            randomIdx.add(randomNum);
             if (randomIdx.size >= num) {
                 return randomIdx;
+            } else {
+                let randomNum = Math.floor(Math.random() * quizCnt);
+                randomIdx.add(randomNum);
             }
         }
     };
@@ -102,9 +105,20 @@ const QuizSolve = (props) => {
                     </select>
                 </div>
                 <div className={styles.quizStart}>
-                    <Link to="/quiz" state={{ quiz: randomBook }}>
-                        <button className={styles.quizStartBtn}>시작!</button>
-                    </Link>
+                    <button
+                        className={styles.quizStartBtn}
+                        onClick={() =>
+                            randomBook && randomBook.length !== 0
+                                ? navigate('/quiz', {
+                                      state: {
+                                          quiz: randomBook,
+                                      },
+                                  })
+                                : alert('선택된 문제가 없어요😅')
+                        }
+                    >
+                        시작!
+                    </button>
                 </div>
             </section>
         </>
