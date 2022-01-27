@@ -1,9 +1,17 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
 
 .container {
-    padding: 8em;
     height: 90vh;
-    background-color: makerBackground;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
@@ -11,17 +19,10 @@
     width: 60%;
     margin: auto;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .card {
-    margin-top: 1em;
-    width: 60%;
-    margin: auto;
-}
-
-.cardPage {
-    margin-top: 1em;
     width: 60%;
     margin: auto;
 }

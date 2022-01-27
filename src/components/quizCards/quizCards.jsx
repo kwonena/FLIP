@@ -6,7 +6,7 @@ const QuizCards = (props) => {
     return (
         <>
             <ul className={styles.list}>
-                <QuizCard />
+                {/* <QuizCard /> */}
                 {/* {cards.map((card) => (
           <QuizCard key={card.id} card={card} />
         ))} */}

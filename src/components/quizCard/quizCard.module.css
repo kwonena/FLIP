@@ -1,9 +1,15 @@
+@value makerBlue from '../../common/colors.css';
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+}
 .cardFront,
 .cardBack {
     cursor: pointer;
-    height: 14em;
+    padding: 2em;
+    height: 40vh;
     width: 100%;
-    margin-bottom: 0.8rem;
     border-style: none;
     border-radius: 1.2em;
     background-color: white;
@@ -13,7 +19,38 @@
 }
 
 .cardFront {
+    display: grid;
+    grid-template-rows: 1.5fr 8.5fr;
 }
 
 .cardBack {
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.cardName {
+    color: makerBlue;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: start;
+}
+
+.cardContent {
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: 1.6em;
+    text-align: start;
+}
+
+.cardPage {
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 1.1em;
+}
+
+.cardPage button {
+    background-color: transparent;
+    margin: 0 1em;
 }

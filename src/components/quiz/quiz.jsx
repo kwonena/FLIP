@@ -10,16 +10,16 @@ const Quiz = (props) => {
     return (
         <>
             <Header />
-            <section className={styles.container}>
-                <span className={styles.cardText}>카드를 클릭해 정답 확인</span>
-                <div className={styles.card}>
-                    <QuizCard />
-                </div>
-                <span className={styles.cardPage}>
-                    <i className="fas fa-arrow-left"></i> 1 / 10
-                    <i className="fas fa-arrow-right"></i>
-                </span>
-            </section>
+            <div className={styles.container}>
+                <section className={styles.quiz}>
+                    <span className={styles.cardText}>
+                        카드를 클릭해 정답 확인
+                    </span>
+                    <div className={styles.card}>
+                        <QuizCard />
+                    </div>
+                </section>
+            </div>
         </>
     );
 };
