@@ -17,7 +17,10 @@ const QuizSolve = (props) => {
         workBooks
             .showBooks(page) //
             .then((items) => {
-                setBooks(items);
+                const quizBooks = items.map((item) => {
+                    return { ...item, selected: false };
+                });
+                setBooks(quizBooks);
             });
     };
     const hiddenBooks = (page) => {
@@ -56,6 +59,7 @@ const QuizSolve = (props) => {
 
     const handlePrev = () => {
         const prevPage = page - 1;
+        hiddenBooks(prevPage);
         if (prevPage < 1) {
             alert('다음 문제집이 없어요😅');
             setPrevDisable(true);
@@ -116,7 +120,7 @@ const QuizSolve = (props) => {
                 <div className={styles.quizSetting}>
                     <h1
                         onClick={() => {
-                            console.log(randomBook);
+                            console.log(page, nextBooks);
                         }}
                     >
                         퀴즈설정
@@ -125,6 +129,7 @@ const QuizSolve = (props) => {
                     <div className={styles.quizBooks}>
                         <QuizBooks
                             books={books}
+                            setBooks={setBooks}
                             prevDisable={prevDisable}
                             nextDisable={nextDisable}
                             handleNext={handleNext}

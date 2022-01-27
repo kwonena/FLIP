@@ -1,3 +1,5 @@
+@value makerBlue from '../../common/colors.css';
+
 .item {
     padding: 1.8rem;
     display: flex;
@@ -13,6 +15,9 @@
     transition: transform 250ms ease-in;
 }
 
+.test {
+    border: 0.3em solid makerBlue;
+}
 .item:hover {
     cursor: pointer;
     transform: scale(1.02);

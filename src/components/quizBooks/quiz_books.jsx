@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import QuizBook from '../quizBook/quiz_book';
 import styles from './quiz_books.module.css';
 
 const QuizBooks = ({
     books,
+    setBooks,
     prevDisable,
     nextDisable,
     handleNext,
     handlePrev,
     selectBook,
 }) => {
+    const clickedBook = (book) => {
+        const showBooks = books.map((item) => {
+            if (item.id === book.id) {
+                return { ...item, selected: true };
+            } else {
+                return { ...item, selected: false };
+            }
+        });
+        setBooks(showBooks);
+    };
+
     return (
         <section className={styles.container}>
             <button
@@ -24,7 +36,9 @@ const QuizBooks = ({
                     <QuizBook
                         key={book.id}
                         book={book}
+                        selected={book.selected}
                         selectBook={selectBook}
+                        clickedBook={clickedBook}
                     />
                 ))}
             </ul>

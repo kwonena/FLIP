@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './quiz_book.module.css';
 
-const QuizBook = ({ book, selectBook }) => {
+const QuizBook = ({ book, selectBook, clickedBook, selected }) => {
     const setBook = () => {
         selectBook(book);
+        clickedBook(book);
     };
     return (
         <>
-            <li onClick={setBook} className={styles.item}>
+            <li
+                onClick={setBook}
+                className={
+                    selected ? `${styles.item} ${styles.test}` : styles.item
+                }
+            >
                 <div className={styles.bookTitle}>{book.title}</div>
                 <div className={styles.bookCount}>
                     {book.cards.length}개의 카드
