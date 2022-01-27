@@ -1,17 +1,20 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
 
 .card {
-    width: 50%;
-    height: 78vh;
+    width: 60%;
+    height: 82vh;
     position: absolute;
-    border: 3px solid black;
-    top: 10%;
-    left: 25%;
+    border-radius: 2rem;
+    top: 13%;
+    left: 20%;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45)
 }
 
 .show {
@@ -29,21 +32,17 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .titleBox {
     width: 90%;
-    display: flex;
-    justify-content:left;
     margin-bottom: 2rem;
+    justify-content: center;
 }
 
 .name {
     font-weight: bold;
-    font-size: larger;
-    position: absolute;
-    left: 44%;
+    font-size: 1.5rem;
 }
 
 .closeBtn {
