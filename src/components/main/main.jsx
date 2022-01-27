@@ -4,7 +4,7 @@ import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
-const Main = ({ books }) => {
+const Main = ({ books, deleteBook }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -45,7 +45,7 @@ const Main = ({ books }) => {
             </button>
           </div>
           <div className={styles.books}>
-            <Books books={books} />
+            <Books books={books} deleteBook={deleteBook} />
           </div>
         </div>
       </section>

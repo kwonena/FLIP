@@ -2,10 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./book.module.css";
 
-const Book = ({ book, onDelete }) => {
+const Book = ({ book, onDelete, deleteBook }) => {
   const navigate = useNavigate();
-  const deleteCard = () => {
-    onDelete(book);
+  // const deleteCard = () => {
+  //   onDelete(book);
+  // };
+
+  const onDeleteBook = () => {
+    deleteBook(book);
   };
 
   return (
@@ -33,7 +37,7 @@ const Book = ({ book, onDelete }) => {
           >
             <i class="fas fa-edit fa-2x"></i>
           </button>
-          <button className={styles.bookDelete} onClick={deleteCard}>
+          <button className={styles.bookDelete} onClick={onDeleteBook}>
             <i class="fas fa-trash-alt fa-2x"></i>
           </button>
         </footer>

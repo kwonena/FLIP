@@ -26,6 +26,16 @@ function App() {
     showBooks(1);
   }, []);
 
+  const deleteBook = (book) => {
+    // const updated = books.filter((item) => item.id !== book.id);
+    // setBooks(updated);
+    workBooks
+      .deleteBooks(book) //
+      .then((items) => {
+        setBooks(items);
+      });
+  };
+
   const createOrUpdateCard = (card) => {
     setCards((cards) => {
       const updated = { ...cards };
@@ -46,7 +56,11 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Main books={books} />} />
+          <Route
+            exact
+            path="/"
+            element={<Main books={books} deleteBook={deleteBook} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route
             path="/addBook"

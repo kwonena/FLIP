@@ -51,6 +51,7 @@ const AddBook = ({ createOrUpdateCard, deleteCard }) => {
             createOrUpdateCard={createOrUpdateCard}
             deleteCard={deleteCard}
             book={book}
+            title={title}
           />
           {isCards && (
             <section className={styles.cardList}>
