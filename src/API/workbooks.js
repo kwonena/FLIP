@@ -1,18 +1,11 @@
-import axios from "axios";
-
 class WorkBooks {
-  constructor() {
-    this.workBooks = axios.create({
-      baseURL: "http://54.180.103.35:3000/api/v1",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1va2hzMDBAbmF2ZXIuY29tIiwiaWF0IjoxNjQzMTIyNzg5LCJleHAiOjE2NDM3Mjc1ODl9.s6Hu-TP12Ewo3eSEpQ0Hrd0tD-wB8R9AZmb--kVTtX8",
-      },
-    });
+  constructor(httpClient) {
+    this.workBooks = httpClient;
   }
 
   async showBooks(page) {
-    const response = await this.workBooks.get("workbooks", {
+    // 내 문제집 보기
+    const response = await this.workBooks.get("workbooks/me", {
       params: {
         page: page,
         limit: 4,
@@ -22,7 +15,36 @@ class WorkBooks {
   }
 
   async deleteBooks(id) {
+    // 내 문제집 삭제하기
     const response = await this.workBooks.delete(`workbooks/${id}`);
+    return response.status;
+  }
+
+  async createCard(card) {
+    // 내 카드 만들기
+    const response = await this.cards.post("cards", {
+      params: {
+        question: card.question,
+        result: card.result,
+      },
+    });
+    return response.data.items;
+  }
+
+  async modifyCard(card) {
+    // 내 카드 수정하기
+    const response = await this.cards.patch("cards", {
+      params: {
+        question: card.question,
+        result: card.result,
+      },
+    });
+    return response.data.items;
+  }
+
+  async deleteCard(id) {
+    // 내 카드 삭제하기
+    const response = await this.cards.delete(`cards/${id}`);
     return response.status;
   }
 }

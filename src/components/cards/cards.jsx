@@ -3,6 +3,7 @@ import Card from "../card/card";
 import styles from "./cards.module.css";
 
 const Cards = ({ cards }) => {
+  console.log(cards);
   return (
     <>
       <ul className={styles.list}>

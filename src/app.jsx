@@ -6,17 +6,13 @@ import Main from "./components/main/main";
 import AddBook from "./components/addBook/addBook";
 import QuizSolve from "./components/quizSolve/quizSolve";
 import Quiz from "./components/quiz/quiz";
-import WorkBooks from "./API/workbooks";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
-import Cards from "./API/cards";
 
-function App() {
-  const workBooks = new WorkBooks();
-  const cardInBook = new Cards();
-
+function App({ workBooks }) {
   const [books, setBooks] = useState([]);
   const [cards, setCards] = useState([]);
+
   const showBooks = (page) => {
     workBooks
       .showBooks(page) //
@@ -39,15 +35,15 @@ function App() {
   };
 
   const addCard = (card) => {
-    cardInBook.createCard(card);
+    workBooks.createCard(card);
   };
 
   const updateCard = (card) => {
-    cardInBook.modifyCard(card);
+    workBooks.modifyCard(card);
   };
 
   const deleteCard = (id) => {
-    cardInBook.deleteCard(id);
+    workBooks.deleteCard(id);
   };
 
   return (
@@ -70,7 +66,10 @@ function App() {
               />
             }
           />
-          <Route path="/quizSolve" element={<QuizSolve />} />
+          <Route
+            path="/quizSolve"
+            element={<QuizSolve workBooks={workBooks} />}
+          />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/singUp" element={<SignUp />} />
