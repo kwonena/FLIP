@@ -6,49 +6,34 @@ class Cards {
       baseURL: "http://54.180.103.35:3000/api/v1",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1va2hzMDBAbmF2ZXIuY29tIiwiaWF0IjoxNjQyNTAwODY0LCJleHAiOjE2NDMxMDU2NjR9.opVYGMcjDA18JNqDpdXHQfSJ7PCklVCLKDrtc0WzVBU",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1va2hzMDBAbmF2ZXIuY29tIiwiaWF0IjoxNjQzMTIyNzg5LCJleHAiOjE2NDM3Mjc1ODl9.s6Hu-TP12Ewo3eSEpQ0Hrd0tD-wB8R9AZmb--kVTtX8",
       },
     });
   }
 
-  async showCards(id) {
-    const response = await this.cards.get("cards", {
-      params: {
-        page: 1,
-        limit: 10,
-      },
-    });
-    return response.data.items;
-  }
-
-  async createCards() {
+  async createCard(card) {
     const response = await this.cards.post("cards", {
       params: {
-        question: "질문",
-        result: "정답",
+        question: card.question,
+        result: card.result,
       },
     });
     return response.data.items;
   }
 
-  async modifyCards() {
+  async modifyCard(card) {
     const response = await this.cards.patch("cards", {
       params: {
-        question: "질문",
-        result: "정답",
+        question: card.question,
+        result: card.result,
       },
     });
     return response.data.items;
   }
 
-  async deleteCards() {
-    const response = await this.cards.del("cards", {
-      params: {
-        page: 1,
-        limit: 10,
-      },
-    });
-    return response.data.items;
+  async deleteCard(id) {
+    const response = await this.cards.delete(`cards/${id}`);
+    return response.status;
   }
 }
 
