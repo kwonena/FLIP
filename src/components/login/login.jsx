@@ -1,31 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ClientService from "../../API/clientService";
 import Header from "../header/header";
 import styles from "./login.module.css";
 
 // header에서 로그인 안 보이게
 const Login = (props) => {
+  const clientService = new ClientService();
   const navigate = useNavigate();
-  const [inputId, setInputId] = useState("");
+  const [email, setEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
 
-  const handleInputId = (e) => {
-    setInputId(e.target.value);
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
   };
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
   };
 
-  // const onLogin = () => {
-  //   authLogin
-  //     .login(inputId, inputPw) //
-  //     .then((res) => {
-  //       console.log(res);
-  //       if (res.resultcode === 1) {
-  //         navigate("");
-  //       }
-  //     });
-  // };
+  const onLogin = () => {
+    clientService
+      .login(email, inputPw) //
+      .then((data) => goToMain(data.user.email));
+  };
+
+  const goToMain = (email) => {
+    navigate({
+      pathname: "/main",
+      state: { id: email },
+    });
+  };
 
   return (
     <>
@@ -34,22 +38,8 @@ const Login = (props) => {
         <spna className={styles.title}>LOGIN</spna>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <input
-              type="text"
-              className={styles.id}
-              placeholder="아이디"
-              name="id"
-              value={inputId}
-              onChange={handleInputId}
-            />
-            <input
-              type="password"
-              className={styles.password}
-              placeholder="비밀번호"
-              name="password"
-              value={inputPw}
-              onChange={handleInputPw}
-            />
+            <input type="text" className={styles.email} placeholder="이메일" name="email" value={email} onChange={handleEmail} />
+            <input type="password" className={styles.password} placeholder="비밀번호" name="password" value={inputPw} onChange={handleInputPw} />
           </li>
           <li className={styles.item}>
             <button type="submit" className={styles.button}>
@@ -58,7 +48,7 @@ const Login = (props) => {
           </li>
           <div className={styles.singUp}>
             <spna>아직 계정이 없으시다면?</spna>
-            <button className={styles.sign} onClick={() => navigate("/singUp")}>
+            <button className={styles.sign} onClick={onLogin}>
               회원가입
             </button>
           </div>

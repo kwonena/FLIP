@@ -29,7 +29,7 @@
     position: relative;
 }
 
-.id,
+.email,
 .password {
     width: 32rem;
     height: 3.9em;
