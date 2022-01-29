@@ -1,5 +1,5 @@
-.cardFront,
-.cardBack {
+.container {
+    flex-direction: column;
     cursor: pointer;
     height: 14em;
     width: 100%;
@@ -12,8 +12,56 @@
     -moz-box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);
 }
 
-.cardFront {
+.card {
+    padding: 2.2rem;
+    margin-bottom: 3.8rem;
+    text-align: center;
 }
 
-.cardBack {
+.cardName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.8rem;
+}
+
+.hr {
+    border: 1px solid #cccccc;
+    background-color: #cccccc;
+}
+
+.cardContent {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.cardFooter {
+    text-align: end;
+}
+
+.cardEdit,
+.cardDelete {
+    transition: transform 250ms ease-in;
+    color: grey;
+}
+
+.cardEdit:hover,
+.cardDelete:hover {
+    transform: scale(1.02);
+}
+
+.cardEdit {
+    background-color: white;
+}
+
+.cardEdit:hover {
+    color: blue;
+}
+
+.cardDelete {
+    background-color: white;
+}
+
+.cardDelete:hover {
+    color: red;
 }
