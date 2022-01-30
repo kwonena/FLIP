@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./card.module.css";
 
-const Card = ({ card }) => {
+const Card = ({ card, deleteCard }) => {
+  const onDeleteCard = () => {
+    deleteCard(card.id);
+  };
+
   return (
     <li className={styles.container}>
       <section className={styles.card}>
@@ -13,7 +17,7 @@ const Card = ({ card }) => {
           <button className={styles.cardEdit}>
             <i class="fas fa-edit fa-2x"></i>
           </button>
-          <button className={styles.cardDelete}>
+          <button className={styles.cardDelete} onClick={onDeleteCard}>
             <i class="fas fa-trash-alt fa-2x"></i>
           </button>
         </footer>

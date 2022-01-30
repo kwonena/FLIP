@@ -5,11 +5,11 @@ import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
 import { useLocation } from "react-router-dom";
 
-const AddBook = ({ createOrUpdateCard, deleteCard, addCard }) => {
+const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
   const location = useLocation();
   const { isCards, book, cards, title } = location.state;
 
-  const [visibleCard, setVisibleCard] = useState([]); // 현재 보이는 카드
+  //const [visibleCard, setVisibleCard] = useState([]); // 현재 보이는 카드
   const [popOpen, setPopOpen] = useState(false);
 
   const openPop = () => {
@@ -50,15 +50,13 @@ const AddBook = ({ createOrUpdateCard, deleteCard, addCard }) => {
           <AddCard
             open={popOpen}
             close={closePop}
-            createOrUpdateCard={createOrUpdateCard}
-            deleteCard={deleteCard}
             book={book}
             title={title}
             addCard={addCard}
           />
           {isCards && (
             <section className={styles.cardList}>
-              <Cards cards={cards} />
+              <Cards cards={cards} deleteCard={deleteCard} />
             </section>
           )}
         </section>

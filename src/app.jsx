@@ -34,8 +34,19 @@ function App({ workBooks }) {
       });
   };
 
-  const addCard = (card) => {
-    workBooks.createCard(card);
+  const showCards = (page) => {
+    workBooks
+      .showCards(page) //
+      .then((items) => {
+        setCards(items);
+      });
+  };
+  const addCard = (card, id) => {
+    workBooks.createCard(card, id).then((result) => {
+      if (result === 200) {
+        showBooks(1);
+      }
+    });
   };
 
   const updateCard = (card) => {
@@ -43,7 +54,9 @@ function App({ workBooks }) {
   };
 
   const deleteCard = (id) => {
-    workBooks.deleteCard(id);
+    workBooks
+      .deleteCard(id) //
+      .then(showCards(1));
   };
 
   return (
@@ -63,6 +76,7 @@ function App({ workBooks }) {
                 updateCard={updateCard}
                 deleteCard={deleteCard}
                 addCard={addCard}
+                cards={cards}
               />
             }
           />

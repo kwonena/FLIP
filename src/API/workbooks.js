@@ -20,20 +20,32 @@ class WorkBooks {
     return response.status;
   }
 
-  async createCard(card) {
-    // 내 카드 만들기
-    const response = await this.cards.post("cards", {
+  async showCards(page) {
+    // 내 문제집 보기
+    const response = await this.workBooks.get("workbooks/cards", {
       params: {
-        question: card.question,
+        page: page,
+        limit: 4,
+      },
+    });
+    return response.data.items.cards;
+  }
+
+  async createCard(card, id) {
+    // 내 카드 만들기
+    const response = await this.workBooks.post(`workbooks/${id}/cards`, {
+      data: {
+        qusetion: card.question,
         result: card.result,
       },
     });
+
     return response.data.items;
   }
 
   async modifyCard(card) {
     // 내 카드 수정하기
-    const response = await this.cards.patch("cards", {
+    const response = await this.workBooks.patch("workbooks/cards", {
       params: {
         question: card.question,
         result: card.result,
@@ -44,8 +56,8 @@ class WorkBooks {
 
   async deleteCard(id) {
     // 내 카드 삭제하기
-    const response = await this.cards.delete(`cards/${id}`);
-    return response.status;
+    const response = await this.workBooks.delete(`workbooks/cards/${id}`);
+    return response.data.items;
   }
 }
 
