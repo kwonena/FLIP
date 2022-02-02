@@ -21,10 +21,13 @@
     margin-top: 3rem;
 }
 
+.titleBox {
+    margin-bottom: 0.4rem;
+}
+
 .title {
     font-weight: bolder;
-    font-size: larger;
-    margin-bottom: 0.4rem;
+    font-size: 1.5rem;
     border:none;
     background-color:makerBackground;
     outline: none;
@@ -41,7 +44,7 @@
 
 .text {
     font-size: smaller;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     color: gray;
 }
 

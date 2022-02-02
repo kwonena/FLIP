@@ -36,7 +36,6 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
                   name="title"
                 />
               )}
-              <button className={styles.titleBtn}>확인</button>
             </div>
             <span className={styles.text}>0개의 카드를 학습 중이에요.</span>
             <div className={styles.buttons}>
