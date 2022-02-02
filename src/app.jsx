@@ -8,10 +8,16 @@ import QuizSolve from "./components/quizSolve/quizSolve";
 import Quiz from "./components/quiz/quiz";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
+import WorkBooks from "./API/workbooks";
 
-function App({ workBooks }) {
+function App() {
+  // const navigate = useNavigate();
+
   const [books, setBooks] = useState([]);
   const [cards, setCards] = useState([]);
+  const [token, setToken] = useState(null);
+
+  const workBooks = new WorkBooks(token);
 
   const showBooks = (page) => {
     workBooks
@@ -22,7 +28,9 @@ function App({ workBooks }) {
   };
   useEffect(() => {
     showBooks(1);
-  }, []);
+    console.log(books);
+    console.log(token);
+  }, [token]);
 
   const deleteBook = (id) => {
     workBooks
@@ -66,7 +74,9 @@ function App({ workBooks }) {
           <Route
             exact
             path="/"
-            element={<Main books={books} deleteBook={deleteBook} />}
+            element={
+              <Main books={books} deleteBook={deleteBook} setToken={setToken} />
+            }
           />
           <Route path="/login" element={<Login />} />
           <Route
@@ -82,11 +92,11 @@ function App({ workBooks }) {
           />
           <Route
             path="/quizSolve"
-            element={<QuizSolve workBooks={workBooks} />}
+            element={<QuizSolve workBooks={workBooks} token={token} />}
           />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
-          <Route path="/singUp" element={<SignUp />} />
+          <Route path="/signUp" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </div>

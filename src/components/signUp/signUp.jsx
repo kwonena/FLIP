@@ -39,9 +39,30 @@ const SignUp = (props) => {
         <span className={styles.title}>SIGN UP</span>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <input type="text" className={styles.input} placeholder="이메일" ref={emailRef} name="email" onChange={onChange} />
-            <input type="password" className={styles.input} placeholder="비밀번호" ref={passwordRef} name="password" onChange={onChange} />
-            <input type="password" className={styles.input} placeholder="비밀번호 확인" ref={passCheckRef} name="passCheck" onChange={onChange} />
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="이메일"
+              ref={emailRef}
+              name="email"
+              onChange={onChange}
+            />
+            <input
+              type="password"
+              className={styles.input}
+              placeholder="비밀번호"
+              ref={passwordRef}
+              name="password"
+              onChange={onChange}
+            />
+            <input
+              type="password"
+              className={styles.input}
+              placeholder="비밀번호 확인"
+              ref={passCheckRef}
+              name="passCheck"
+              onChange={onChange}
+            />
           </li>
           <li className={styles.item}>
             <button type="submit" className={styles.button} onClick={onSubmit}>

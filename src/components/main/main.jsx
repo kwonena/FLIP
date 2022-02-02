@@ -1,11 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
-const Main = ({ books, deleteBook }) => {
+const Main = ({ books, deleteBook, setToken }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  if (location.state) {
+    setToken(location.state.accessToken);
+  }
+
   return (
     <>
       <Header />
@@ -21,7 +27,13 @@ const Main = ({ books, deleteBook }) => {
             <button
               className={styles.quizBtn}
               onClick={() => {
-                navigate("/quizSolve");
+                if (!location.state) {
+                  alert("로그인이 필요한 서비스입니다.");
+                } else if (books.length == 0) {
+                  alert("내 문제집이 없습니다!");
+                } else {
+                  navigate("/quizSolve");
+                }
               }}
             >
               퀴즈 풀러 가기
