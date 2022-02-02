@@ -1,33 +1,52 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ClientService from "../../API/clientService";
+import { Link, useNavigate } from "react-router-dom";
+import Auth from "../../API/auth";
 import Header from "../header/header";
 import styles from "./login.module.css";
 
 // header에서 로그인 안 보이게
 const Login = (props) => {
-  const clientService = new ClientService();
   const navigate = useNavigate();
+  const auth = new Auth();
+
   const [email, setEmail] = useState("");
-  const [inputPw, setInputPw] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
   };
 
-  const onLogin = () => {
-    clientService
-      .login(email, inputPw) //
-      .then((data) => goToMain(data.user.email));
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
   };
 
-  const goToMain = (email) => {
-    navigate({
-      pathname: "/main",
-      state: { id: email },
+  const onLogin = (event) => {
+    event.preventDefault();
+
+    auth
+      .logIn(email, password) //
+      .then((response) => {
+        // console.log(response.data.accessToken);
+        backToMain(response.data.accessToken);
+      })
+      .catch((error) => {
+        switch (error.response.status) {
+          case 401:
+            alert("비밀번호를 확인해주세요");
+            break;
+          case 404:
+            alert("이메일을 확인해주세요");
+            break;
+          case 400:
+            alert("입력된 정보를 확인해주세요");
+            break;
+        }
+      });
+  };
+
+  const backToMain = (token) => {
+    navigate("/", {
+      state: { accessToken: token },
     });
   };
 
@@ -35,24 +54,34 @@ const Login = (props) => {
     <>
       <Header />
       <section className={styles.login}>
-        <spna className={styles.title}>LOGIN</spna>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <input type="text" className={styles.email} placeholder="이메일" name="email" value={email} onChange={handleEmail} />
-            <input type="password" className={styles.password} placeholder="비밀번호" name="password" value={inputPw} onChange={handleInputPw} />
-          </li>
-          <li className={styles.item}>
-            <button type="submit" className={styles.button}>
-              로그인
-            </button>
-          </li>
+        <span className={styles.title}>LOGIN</span>
+        <form className={styles.list} onSubmit={onLogin}>
+          <input
+            // ref={emailRef}
+            type="text"
+            className={styles.email}
+            placeholder="이메일"
+            onChange={handleEmail}
+          />
+          <input
+            // ref={passwordRef}
+            type="password"
+            className={styles.password}
+            placeholder="비밀번호"
+            onChange={handlePassword}
+          />
+          <button type="submit" className={styles.button}>
+            로그인
+          </button>
+
           <div className={styles.singUp}>
-            <spna>아직 계정이 없으시다면?</spna>
-            <button className={styles.sign} onClick={onLogin}>
-              회원가입
-            </button>
+            <span>아직 계정이 없으시다면?</span>
+
+            <Link to="/signUp">
+              <button className={styles.sign}>회원가입</button>
+            </Link>
           </div>
-        </ul>
+        </form>
       </section>
     </>
   );

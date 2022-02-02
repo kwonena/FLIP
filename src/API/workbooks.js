@@ -1,6 +1,13 @@
+import axios from "axios";
+
 class WorkBooks {
-  constructor(httpClient) {
-    this.workBooks = httpClient;
+  constructor(accessToken) {
+    this.workBooks = axios.create({
+      baseURL: "http://54.180.103.35:3000/api/v1",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   }
 
   async showBooks(page) {
