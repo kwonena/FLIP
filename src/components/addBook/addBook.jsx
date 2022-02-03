@@ -47,12 +47,14 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
-  const updateCard = (card) => {
+  const updateCard = (id, question, result) => {
     workBooks
-      .updateCard(card) //
+      .updateCard(id, question, result) //
       .then(() => {
-        // <AddCard open={popOpen} />;
         showCards(book.id);
+      })
+      .catch(() => {
+        alert("모든 정보를 입력해주세요!");
       });
   };
 

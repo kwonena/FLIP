@@ -3,7 +3,7 @@
 .card {
   width: 60%;
   height: 82vh;
-  position: absolute;
+  position: fixed;
   border-radius: 2rem;
   top: 13%;
   left: 20%;

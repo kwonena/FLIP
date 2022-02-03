@@ -35,7 +35,7 @@ class WorkBooks {
   }
 
   async showCards(id) {
-    // 내 문제집 보기
+    // 내 카드 보기
     const response = await this.workBooks.get(`workbooks/${id}`);
     return response.data.cards;
   }
@@ -49,15 +49,13 @@ class WorkBooks {
     return response.data;
   }
 
-  async updateCard(card) {
+  async updateCard(id, question, result) {
     // 내 카드 수정하기
-    const response = await this.workBooks.patch(`workbooks/cards/${card.id}`, {
-      params: {
-        question: card.question,
-        result: card.result,
-      },
+    const response = await this.workBooks.patch(`workbooks/cards/${id}`, {
+      question: question,
+      result: result,
     });
-    return response.data.cards;
+    return response;
   }
 
   async deleteCard(id) {
