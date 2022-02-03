@@ -22,6 +22,7 @@ function App() {
   const workBooks = new WorkBooks();
 
   useEffect(() => {
+    console.log("hi");
     if (token) {
       showBooks(1);
     } else {
@@ -38,11 +39,9 @@ function App() {
   };
   const deleteBook = (id) => {
     workBooks
-      .deleteBooks(id) //
-      .then((result) => {
-        if (result === 200) {
-          showBooks(1);
-        }
+      .deleteBook(id) //
+      .then(() => {
+        showBooks(1);
       });
   };
 
@@ -92,6 +91,7 @@ function App() {
                 deleteCard={deleteCard}
                 addCard={addCard}
                 cards={cards}
+                showBooks={showBooks}
               />
             }
           />

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./addBook.module.css";
 import Header from "../header/header";
 import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import WorkBooks from "../../API/workbooks";
 
-const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
+const AddBook = ({ inCards, updateCard, deleteCard, addCard, showBooks }) => {
   const location = useLocation();
   const { isCards, book, cards, title } = location.state;
 
@@ -19,6 +20,33 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
     setPopOpen(false);
   };
 
+  // 문제집 추가하기
+  const navigate = useNavigate();
+  const workBooks = new WorkBooks();
+  const [newBook, setNewBook] = useState("");
+
+  const handleTitle = (event) => {
+    setNewBook(event.target.value);
+  };
+
+  const onKeyPress = (event) => {
+    if (event.key === "Enter") {
+      createBook();
+    }
+  };
+
+  const createBook = () => {
+    workBooks
+      .addBook(newBook) //
+      .then(() => {
+        showBooks(1);
+        navigate("/");
+      })
+      .catch(() => {
+        alert("제목은 공백일 수 없습니다.");
+      });
+  };
+
   return (
     <>
       <Header />
@@ -30,6 +58,8 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
                 <span className={styles.title}>{title}</span>
               ) : (
                 <input
+                  onKeyPress={onKeyPress}
+                  onChange={handleTitle}
                   type="text"
                   className={styles.title}
                   placeholder="문제집 제목"
@@ -37,15 +67,27 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard }) => {
                 />
               )}
             </div>
-            <span className={styles.text}>0개의 카드를 학습 중이에요.</span>
+            {isCards ? (
+              <span className={styles.text}>0개의 카드를 학습 중이에요.</span>
+            ) : (
+              <span className={styles.text}>문제집 제목을 입력해주세요.</span>
+            )}
+
             <div className={styles.buttons}>
               <button className={styles.newBtn}>최신순</button>
               <button className={styles.starBtn}>즐겨찾기순</button>
             </div>
           </section>
-          <button className={styles.addCardBtn} onClick={openPop}>
-            새로운 카드 추가하기
-          </button>
+          {isCards ? (
+            <button className={styles.addCardBtn} onClick={openPop}>
+              새로운 카드 추가하기
+            </button>
+          ) : (
+            <button className={styles.addCardBtn} onClick={createBook}>
+              새로운 문제집 추가하기
+            </button>
+          )}
+
           <AddCard
             open={popOpen}
             close={closePop}

@@ -22,10 +22,16 @@ class WorkBooks {
     return response.data.items;
   }
 
-  async deleteBooks(id) {
+  async deleteBook(id) {
     // 내 문제집 삭제하기
-    const response = await this.workBooks.delete(`workbooks/${id}`);
-    return response.status;
+    await this.workBooks.delete(`workbooks/${id}`);
+  }
+
+  async addBook(title) {
+    // 내 문제집 추가하기
+    await this.workBooks.post("workbooks", {
+      title: title,
+    });
   }
 
   async showCards(page) {
