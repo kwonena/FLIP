@@ -1,41 +1,82 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./signUp.module.css";
 import Header from "../header/header";
+import Auth from "../../API/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = (props) => {
+  const navigate = useNavigate();
+  const auth = new Auth();
+
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passCheckRef = useRef();
+  const passwordCheckRef = useRef();
 
-  const onSubmit = () => {
-    if (onChange() === true) {
-      if (passwordRef.current.value !== passCheckRef.current.value) {
-        alert("비밀번호를 다시 입력주세요");
-      } else alert("가입 되었습니다.");
+  const [emailMsg, setEailMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const [passwordCheckMsg, setPasswordCheckMsg] = useState("");
+
+  const onSignUp = (event) => {
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const password_check = passwordCheckRef.current.value;
+
+    event.preventDefault();
+    setEailMsg("");
+    setPasswordMsg("");
+    setPasswordCheckMsg("");
+
+    if (password !== password_check) {
+      setPasswordCheckMsg("비밀번호가 일치하지 않습니다.");
+      console.log(passwordCheckMsg);
     } else {
-      if (emailRef.current.value === "") {
-        alert("이메일를 입력해주세요");
-      } else if (passwordRef.current.value === "") {
-        alert("비밀번호를 입력해주세요");
-      } else if (passCheckRef.current.value === "") {
-        alert("비밀번호 확인을 입력해주세요");
-      }
+      auth
+        .signUp(email, password) //
+        .then((response) => {
+          console.log(response);
+          backToMain(response.data.accessToken);
+        })
+        .catch((error) => {
+          setErrorMsg(error);
+        });
     }
   };
 
-  const onChange = () => {
-    if (emailRef.current.value === "") {
-      return false;
-    } else if (passwordRef.current.value === "") {
-      return false;
-    } else if (passCheckRef.current.value === "") {
-      return false;
-    } else return true;
+  const setErrorMsg = (error) => {
+    const data = error.response.data;
+    switch (data.statusCode) {
+      case 400:
+        if (data.message.length === 2) {
+          setEailMsg("올바르지 못한 이메일 형식입니다.");
+          setPasswordMsg(
+            "비밀번호는 문자, 숫자, 특수문자를 포함한 최소 8자리여야 합니다."
+          );
+        } else {
+          if (data.message[0] === "email must be an email") {
+            setEailMsg("올바르지 못한 이메일 형식입니다.");
+          } else {
+            setPasswordMsg(
+              "비밀번호는 문자, 숫자, 특수문자를 포함한 최소 8자리여야 합니다."
+            );
+          }
+        }
+        break;
+      case 409:
+        setEailMsg("이미 등록된 이메일입니다.");
+        break;
+    }
   };
+
+  const backToMain = (token) => {
+    navigate("/", {
+      state: { accessToken: token },
+    });
+  };
+
   return (
     <>
       <Header />
-      <section className={styles.container}>
+      <form className={styles.container} onSubmit={onSignUp}>
         <span className={styles.title}>SIGN UP</span>
         <ul className={styles.list}>
           <li className={styles.item}>
@@ -45,32 +86,34 @@ const SignUp = (props) => {
               placeholder="이메일"
               ref={emailRef}
               name="email"
-              onChange={onChange}
             />
+            <span className={styles.text}>{emailMsg}</span>
+          </li>
+          <li className={styles.item}>
             <input
               type="password"
               className={styles.input}
               placeholder="비밀번호"
               ref={passwordRef}
               name="password"
-              onChange={onChange}
             />
+            <span className={styles.text}>{passwordMsg}</span>
+          </li>
+          <li className={styles.item}>
             <input
               type="password"
               className={styles.input}
               placeholder="비밀번호 확인"
-              ref={passCheckRef}
+              ref={passwordCheckRef}
               name="passCheck"
-              onChange={onChange}
             />
-          </li>
-          <li className={styles.item}>
-            <button type="submit" className={styles.button} onClick={onSubmit}>
-              가입하기
-            </button>
+            <span className={styles.text}>{passwordCheckMsg}</span>
           </li>
         </ul>
-      </section>
+        <button type="submit" className={styles.button}>
+          가입하기
+        </button>
+      </form>
     </>
   );
 };
