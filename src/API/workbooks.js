@@ -34,44 +34,35 @@ class WorkBooks {
     });
   }
 
-  async showCards(page) {
+  async showCards(id) {
     // 내 문제집 보기
-    const response = await this.workBooks.get("workbooks/cards", {
-      params: {
-        page: page,
-        limit: 4,
-      },
-    });
-    return response.data.items.cards;
+    const response = await this.workBooks.get(`workbooks/${id}`);
+    return response.data.cards;
   }
 
-  async createCard(card, id) {
+  async addCard(question, result, bookId) {
     // 내 카드 만들기
-    const response = await this.workBooks.post(`workbooks/${id}/cards`, {
-      data: {
-        qusetion: card.question,
-        result: card.result,
-      },
+    const response = await this.workBooks.post(`workbooks/${bookId}/cards`, {
+      qusetion: question,
+      result: result,
     });
-
-    return response.data.items;
+    return response.data.cards;
   }
 
-  async modifyCard(card) {
+  async updateCard(card) {
     // 내 카드 수정하기
-    const response = await this.workBooks.patch("workbooks/cards", {
+    const response = await this.workBooks.patch(`workbooks/cards/${card.id}`, {
       params: {
         question: card.question,
         result: card.result,
       },
     });
-    return response.data.items;
+    return response.data.cards;
   }
 
   async deleteCard(id) {
     // 내 카드 삭제하기
-    const response = await this.workBooks.delete(`workbooks/cards/${id}`);
-    return response.data.items;
+    await this.workBooks.delete(`workbooks/cards/${id}`);
   }
 }
 

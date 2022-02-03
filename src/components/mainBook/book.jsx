@@ -20,14 +20,13 @@ const Book = ({ book, deleteBook }) => {
           <button
             className={styles.bookEdit}
             onClick={() => {
-              console.log("book");
+              console.log("book", book.id);
               navigate("/addBook", {
                 state: {
-                  id: book.id,
+                  bookId: book.id,
                   title: book.title,
-                  cards: book.cards,
                   isCards: true,
-                  book: book,
+                  book,
                 },
               });
             }}

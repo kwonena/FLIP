@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./card.module.css";
 
-const Card = ({ card, deleteCard }) => {
+const Card = ({ card, updateCard, deleteCard }) => {
+  const onUpdateCard = () => {
+    updateCard(card);
+  };
   const onDeleteCard = () => {
     deleteCard(card.id);
   };
@@ -14,7 +17,7 @@ const Card = ({ card, deleteCard }) => {
         <div className={styles.cardContent}>{card.result}</div>
 
         <footer className={styles.cardFooter}>
-          <button className={styles.cardEdit}>
+          <button className={styles.cardEdit} onClick={onUpdateCard}>
             <i class="fas fa-edit fa-2x"></i>
           </button>
           <button className={styles.cardDelete} onClick={onDeleteCard}>

@@ -14,15 +14,13 @@ import { getCookie } from "./cookie";
 function App() {
   // const navigate = useNavigate();
   // const token = getCookie("accessToken");
-
-  const [books, setBooks] = useState([]);
-  const [cards, setCards] = useState([]);
-  const [token, setToken] = useState(getCookie("accessToken"));
-  const [user, setUser] = useState(getCookie("userEmail"));
   const workBooks = new WorkBooks();
 
+  const [books, setBooks] = useState([]);
+  const [token, setToken] = useState(getCookie("accessToken"));
+  const [user, setUser] = useState(getCookie("userEmail"));
+
   useEffect(() => {
-    console.log("hi");
     if (token) {
       showBooks(1);
     } else {
@@ -45,29 +43,8 @@ function App() {
       });
   };
 
-  const showCards = (page) => {
-    workBooks
-      .showCards(page) //
-      .then((items) => {
-        setCards(items);
-      });
-  };
-  const addCard = (card, id) => {
-    workBooks.createCard(card, id).then((result) => {
-      if (result === 200) {
-        showBooks(1);
-      }
-    });
-  };
-
   const updateCard = (card) => {
     workBooks.modifyCard(card);
-  };
-
-  const deleteCard = (id) => {
-    workBooks
-      .deleteCard(id) //
-      .then(showCards(1));
   };
 
   return (
@@ -85,15 +62,7 @@ function App() {
           />
           <Route
             path="/addBook"
-            element={
-              <AddBook
-                updateCard={updateCard}
-                deleteCard={deleteCard}
-                addCard={addCard}
-                cards={cards}
-                showBooks={showBooks}
-              />
-            }
+            element={<AddBook updateCard={updateCard} showBooks={showBooks} />}
           />
           <Route
             path="/quizSolve"

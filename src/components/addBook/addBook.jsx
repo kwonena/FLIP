@@ -1,29 +1,68 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./addBook.module.css";
 import Header from "../header/header";
 import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import WorkBooks from "../../API/workbooks";
 
-const AddBook = ({ inCards, updateCard, deleteCard, addCard, showBooks }) => {
-  const location = useLocation();
-  const { isCards, book, cards, title } = location.state;
-
-  //const [visibleCard, setVisibleCard] = useState([]); // 현재 보이는 카드
-  const [popOpen, setPopOpen] = useState(false);
-
-  const openPop = () => {
-    setPopOpen(true);
-  };
-  const closePop = () => {
-    setPopOpen(false);
-  };
-
-  // 문제집 추가하기
-  const navigate = useNavigate();
+const AddBook = ({ inCards, showBooks }) => {
   const workBooks = new WorkBooks();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { isCards, book, title, bookId } = location.state;
+
+  const [cardInBook, setCardsInBook] = useState([]);
+  const [popOpen, setPopOpen] = useState(false);
   const [newBook, setNewBook] = useState("");
+
+  useEffect(() => {
+    if (isCards) {
+      showCards(bookId);
+    } else {
+      setCardsInBook([]);
+    }
+  }, [bookId]);
+
+  const showCards = (bookId) => {
+    workBooks
+      .showCards(bookId) //
+      .then((items) => {
+        console.log(items);
+        setCardsInBook(items);
+      });
+  };
+
+  const addCard = (question, result, bookId) => {
+    console.log("카드 추가");
+    console.log(question, result, bookId);
+    workBooks
+      .addCard(question, result, bookId) //
+      .then((response) => {
+        console.log(response.statusCode);
+        //setCardsInBook(items);
+        console.log("카드 추가22");
+        showCards(bookId);
+      });
+  };
+
+  const updateCard = (card) => {
+    workBooks
+      .updateCard(card) //
+      .then(() => {
+        // <AddCard open={popOpen} />;
+        showCards(bookId);
+      });
+  };
+
+  const deleteCard = (id) => {
+    workBooks
+      .deleteCard(id) //
+      .then(() => {
+        showCards(bookId);
+      });
+  };
 
   const handleTitle = (event) => {
     setNewBook(event.target.value);
@@ -45,6 +84,14 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard, showBooks }) => {
       .catch(() => {
         alert("제목은 공백일 수 없습니다.");
       });
+  };
+
+  const openPop = () => {
+    setPopOpen(true);
+  };
+
+  const closePop = () => {
+    setPopOpen(false);
   };
 
   return (
@@ -93,11 +140,17 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard, showBooks }) => {
             close={closePop}
             book={book}
             title={title}
+            bookId={bookId}
+            showCards={showCards}
             addCard={addCard}
           />
           {isCards && (
             <section className={styles.cardList}>
-              <Cards cards={cards} deleteCard={deleteCard} />
+              <Cards
+                cards={cardInBook}
+                updateCard={updateCard}
+                deleteCard={deleteCard}
+              />
             </section>
           )}
         </section>

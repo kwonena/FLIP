@@ -1,19 +1,36 @@
 import React, { useRef, useState } from "react";
+import WorkBooks from "../../API/workbooks";
 import styles from "./addCard.module.css";
 
-const AddCard = ({ id, title, open, close, addCard }) => {
-  const [cards, setCards] = useState([]);
+const AddCard = ({ bookId, title, open, close, showCards, addCard }) => {
+  const workBooks = new WorkBooks();
+
+  const [question, setQuestion] = useState("");
+  const [result, setResult] = useState("");
   const formRef = useRef();
   const questionRef = useRef();
   const resultRef = useRef();
 
-  const onSave = (event) => {
-    event.preventDefault();
-    const card = {
-      question: questionRef.current.value || "",
-      result: resultRef.current.value || "",
-    };
-    formRef.current.reset();
+  const handleQuestion = (event) => {
+    setQuestion(event.target.value);
+  };
+
+  const handleResult = (event) => {
+    setResult(event.target.value);
+  };
+
+  const onSave = () => {
+    close();
+    workBooks
+      .addCard(question, result, bookId) //
+      .then((response) => {
+        console.log(response.statusCode);
+        //setCardsInBook(items);
+        setQuestion(response.card.question);
+        setResult(response.card.result);
+        console.log("카드 추가22");
+        showCards(bookId);
+      });
   };
 
   return (
@@ -28,19 +45,23 @@ const AddCard = ({ id, title, open, close, addCard }) => {
           </div>
           <section className={styles.textBox}>
             <span className={styles.text}>문제</span>
-            <input type="text" className={styles.textarea} ref={questionRef} />
+            <input
+              type="text"
+              className={styles.textarea}
+              ref={questionRef}
+              onChange={handleQuestion}
+            />
           </section>
           <section className={styles.textBox}>
             <span className={styles.text}>정답</span>
-            <input type="text" className={styles.textarea} ref={resultRef} />
+            <input
+              type="text"
+              className={styles.textarea}
+              ref={resultRef}
+              onChange={handleResult}
+            />
           </section>
-          <button
-            className={styles.addBtn}
-            onClick={() => {
-              close();
-              onSave();
-            }}
-          >
+          <button className={styles.addBtn} onClick={onSave}>
             추가하기
           </button>
         </section>
