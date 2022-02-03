@@ -9,15 +9,25 @@ import Quiz from "./components/quiz/quiz";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
 import WorkBooks from "./API/workbooks";
+import { getCookie } from "./cookie";
 
 function App() {
   // const navigate = useNavigate();
+  // const token = getCookie("accessToken");
 
   const [books, setBooks] = useState([]);
   const [cards, setCards] = useState([]);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(getCookie("accessToken"));
+  const [user, setUser] = useState(getCookie("userEmail"));
+  const workBooks = new WorkBooks();
 
-  const workBooks = new WorkBooks(token);
+  useEffect(() => {
+    if (token) {
+      showBooks(1);
+    } else {
+      setBooks([]);
+    }
+  }, [token]);
 
   const showBooks = (page) => {
     workBooks
@@ -26,12 +36,6 @@ function App() {
         setBooks(items);
       });
   };
-  useEffect(() => {
-    showBooks(1);
-    console.log(books);
-    console.log(token);
-  }, [token]);
-
   const deleteBook = (id) => {
     workBooks
       .deleteBooks(id) //
@@ -74,11 +78,12 @@ function App() {
           <Route
             exact
             path="/"
-            element={
-              <Main books={books} deleteBook={deleteBook} setToken={setToken} />
-            }
+            element={<Main books={books} deleteBook={deleteBook} user={user} />}
           />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setToken={setToken} setUser={setUser} />}
+          />
           <Route
             path="/addBook"
             element={
@@ -92,7 +97,7 @@ function App() {
           />
           <Route
             path="/quizSolve"
-            element={<QuizSolve workBooks={workBooks} token={token} />}
+            element={<QuizSolve workBooks={workBooks} />}
           />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />

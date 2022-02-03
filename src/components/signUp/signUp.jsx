@@ -12,7 +12,7 @@ const SignUp = (props) => {
   const passwordRef = useRef();
   const passwordCheckRef = useRef();
 
-  const [emailMsg, setEailMsg] = useState("");
+  const [emailMsg, setEmailMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
   const [passwordCheckMsg, setPasswordCheckMsg] = useState("");
 
@@ -22,7 +22,7 @@ const SignUp = (props) => {
     const password_check = passwordCheckRef.current.value;
 
     event.preventDefault();
-    setEailMsg("");
+    setEmailMsg("");
     setPasswordMsg("");
     setPasswordCheckMsg("");
 
@@ -34,7 +34,8 @@ const SignUp = (props) => {
         .signUp(email, password) //
         .then((response) => {
           console.log(response);
-          backToMain(response.data.accessToken);
+          alert("회원가입에 성공했습니다!");
+          backToLogin();
         })
         .catch((error) => {
           setErrorMsg(error);
@@ -47,13 +48,13 @@ const SignUp = (props) => {
     switch (data.statusCode) {
       case 400:
         if (data.message.length === 2) {
-          setEailMsg("올바르지 못한 이메일 형식입니다.");
+          setEmailMsg("올바르지 못한 이메일 형식입니다.");
           setPasswordMsg(
             "비밀번호는 문자, 숫자, 특수문자를 포함한 최소 8자리여야 합니다."
           );
         } else {
           if (data.message[0] === "email must be an email") {
-            setEailMsg("올바르지 못한 이메일 형식입니다.");
+            setEmailMsg("올바르지 못한 이메일 형식입니다.");
           } else {
             setPasswordMsg(
               "비밀번호는 문자, 숫자, 특수문자를 포함한 최소 8자리여야 합니다."
@@ -62,15 +63,13 @@ const SignUp = (props) => {
         }
         break;
       case 409:
-        setEailMsg("이미 등록된 이메일입니다.");
+        setEmailMsg("이미 등록된 이메일입니다.");
         break;
     }
   };
 
-  const backToMain = (token) => {
-    navigate("/", {
-      state: { accessToken: token },
-    });
+  const backToLogin = () => {
+    navigate("/login");
   };
 
   return (

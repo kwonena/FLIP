@@ -1,23 +1,20 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
-const Main = ({ books, deleteBook, setToken }) => {
+const Main = ({ books, deleteBook, user }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  if (location.state) {
-    setToken(location.state.accessToken);
-  }
 
   return (
     <>
       <Header />
       <section className={styles.container}>
         <div className={styles.quiz}>
-          <span className={styles.text}>안녕하세요! 마스외전님</span>
+          <span className={styles.text}>
+            안녕하세요! {user ? `${user} 님` : ""}
+          </span>
           <div className={styles.quizBox}>
             <span className={styles.quizText}>
               이제까지 정리한
@@ -27,7 +24,7 @@ const Main = ({ books, deleteBook, setToken }) => {
             <button
               className={styles.quizBtn}
               onClick={() => {
-                if (!location.state) {
+                if (!user) {
                   alert("로그인이 필요한 서비스입니다.");
                 } else if (books.length == 0) {
                   alert("내 문제집이 없습니다!");
