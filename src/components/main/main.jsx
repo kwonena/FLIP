@@ -6,10 +6,11 @@ import styles from "./main.module.css";
 
 const Main = ({ books, deleteBook, user }) => {
   const navigate = useNavigate();
+  const login = user ? true : false;
 
   return (
     <>
-      <Header />
+      <Header login={login} />
       <section className={styles.container}>
         <div className={styles.quiz}>
           <span className={styles.text}>
@@ -42,13 +43,17 @@ const Main = ({ books, deleteBook, user }) => {
             <span className={styles.studyText}>학습 중</span>
             <button
               className={styles.studyBtn}
-              onClick={() =>
-                navigate("/addBook", {
-                  state: {
-                    isCards: false,
-                  },
-                })
-              }
+              onClick={() => {
+                if (!user) {
+                  alert("로그인이 필요한 서비스입니다.");
+                } else {
+                  navigate("/addBook", {
+                    state: {
+                      isCards: false,
+                    },
+                  });
+                }
+              }}
             >
               문제집 추가
             </button>

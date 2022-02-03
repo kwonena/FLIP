@@ -58,7 +58,7 @@ const Login = ({ setToken, setUser }) => {
 
   return (
     <>
-      <Header />
+      <Header login={false} />
       <section className={styles.login}>
         <span className={styles.title}>LOGIN</span>
         <form className={styles.list} onSubmit={onLogin}>

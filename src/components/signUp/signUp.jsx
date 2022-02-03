@@ -74,7 +74,7 @@ const SignUp = (props) => {
 
   return (
     <>
-      <Header />
+      <Header login={true} />
       <form className={styles.container} onSubmit={onSignUp}>
         <span className={styles.title}>SIGN UP</span>
         <ul className={styles.list}>
