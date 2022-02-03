@@ -113,7 +113,7 @@ const QuizSolve = ({ workBooks }) => {
 
   return (
     <>
-      <Header />
+      <Header login={true} />
       <section className={styles.container}>
         <div className={styles.quizSetting}>
           <h1
