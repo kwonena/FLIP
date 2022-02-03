@@ -49,7 +49,7 @@ const AddBook = ({ inCards, updateCard, deleteCard, addCard, showBooks }) => {
 
   return (
     <>
-      <Header />
+      <Header login={true} />
       <section className={styles.container}>
         <section className={styles.addBook}>
           <section className={styles.titleContainer}>
