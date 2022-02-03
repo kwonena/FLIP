@@ -1,15 +1,9 @@
 import React, { useRef, useState } from "react";
-import WorkBooks from "../../API/workbooks";
 import styles from "./addCard.module.css";
 
-const AddCard = ({ bookId, title, open, close, showCards, addCard }) => {
-  const workBooks = new WorkBooks();
-
+const AddCard = ({ open, close, book, addCard }) => {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState("");
-  const formRef = useRef();
-  const questionRef = useRef();
-  const resultRef = useRef();
 
   const handleQuestion = (event) => {
     setQuestion(event.target.value);
@@ -19,26 +13,25 @@ const AddCard = ({ bookId, title, open, close, showCards, addCard }) => {
     setResult(event.target.value);
   };
 
+  // const onKeyPress = (event) => {
+  //   if (event.key === "Enter") {
+  //     onSave();
+  //   }
+  // };
+
   const onSave = () => {
+    addCard(question, result, book.id);
+    setQuestion("");
+    setResult("");
     close();
-    workBooks
-      .addCard(question, result, bookId) //
-      .then((response) => {
-        console.log(response.statusCode);
-        //setCardsInBook(items);
-        setQuestion(response.card.question);
-        setResult(response.card.result);
-        console.log("카드 추가22");
-        showCards(bookId);
-      });
   };
 
   return (
-    <form ref={formRef} className={open ? `styles.show` : `styles.hidden`}>
+    <form lassName={open ? `styles.show` : `styles.hidden`}>
       {open && (
         <section className={styles.card}>
           <div className={styles.titleBox}>
-            <span className={styles.name}>{title}</span>
+            <span className={styles.name}>{book.title}</span>
             <button className={styles.closeBtn} onClick={close}>
               <i className="fas fa-times fa-2x"></i>
             </button>
@@ -48,7 +41,6 @@ const AddCard = ({ bookId, title, open, close, showCards, addCard }) => {
             <input
               type="text"
               className={styles.textarea}
-              ref={questionRef}
               onChange={handleQuestion}
             />
           </section>
@@ -57,7 +49,6 @@ const AddCard = ({ bookId, title, open, close, showCards, addCard }) => {
             <input
               type="text"
               className={styles.textarea}
-              ref={resultRef}
               onChange={handleResult}
             />
           </section>

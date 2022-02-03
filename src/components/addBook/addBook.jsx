@@ -6,12 +6,14 @@ import Cards from "../cards/cards";
 import { useLocation, useNavigate } from "react-router-dom";
 import WorkBooks from "../../API/workbooks";
 
-const AddBook = ({ inCards, showBooks }) => {
+const AddBook = ({ showBooks }) => {
   const workBooks = new WorkBooks();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { isCards, book, title, bookId } = location.state;
+  const { isCards, book } = location.state;
+
+  // console.log(isCards, book);
 
   const [cardInBook, setCardsInBook] = useState([]);
   const [popOpen, setPopOpen] = useState(false);
@@ -19,31 +21,29 @@ const AddBook = ({ inCards, showBooks }) => {
 
   useEffect(() => {
     if (isCards) {
-      showCards(bookId);
+      showCards(book.id);
     } else {
       setCardsInBook([]);
     }
-  }, [bookId]);
+  }, []);
 
-  const showCards = (bookId) => {
+  const showCards = (id) => {
     workBooks
-      .showCards(bookId) //
+      .showCards(id) //
       .then((items) => {
-        console.log(items);
         setCardsInBook(items);
       });
   };
 
   const addCard = (question, result, bookId) => {
-    console.log("카드 추가");
-    console.log(question, result, bookId);
     workBooks
       .addCard(question, result, bookId) //
-      .then((response) => {
-        console.log(response.statusCode);
-        //setCardsInBook(items);
-        console.log("카드 추가22");
-        showCards(bookId);
+      .then((data) => {
+        setCardsInBook(data.cards);
+      })
+      .catch(() => {
+        alert("모든 정보를 입력해주세요!");
+        openPop();
       });
   };
 
@@ -52,7 +52,7 @@ const AddBook = ({ inCards, showBooks }) => {
       .updateCard(card) //
       .then(() => {
         // <AddCard open={popOpen} />;
-        showCards(bookId);
+        showCards(book.id);
       });
   };
 
@@ -60,7 +60,7 @@ const AddBook = ({ inCards, showBooks }) => {
     workBooks
       .deleteCard(id) //
       .then(() => {
-        showCards(bookId);
+        showCards(book.id);
       });
   };
 
@@ -102,7 +102,7 @@ const AddBook = ({ inCards, showBooks }) => {
           <section className={styles.titleContainer}>
             <div className={styles.titleBox}>
               {isCards ? (
-                <span className={styles.title}>{title}</span>
+                <span className={styles.title}>{book.title}</span>
               ) : (
                 <input
                   onKeyPress={onKeyPress}
@@ -115,14 +115,16 @@ const AddBook = ({ inCards, showBooks }) => {
               )}
             </div>
             {isCards ? (
-              <span className={styles.text}>0개의 카드를 학습 중이에요.</span>
+              <span className={styles.text}>
+                {book.cards.lenght}개의 카드를 학습 중이에요.
+              </span>
             ) : (
               <span className={styles.text}>문제집 제목을 입력해주세요.</span>
             )}
 
             <div className={styles.buttons}>
-              <button className={styles.newBtn}>최신순</button>
-              <button className={styles.starBtn}>즐겨찾기순</button>
+              <button className={styles.newBtn}>오래된순</button>
+              <button className={styles.starBtn}>최신순</button>
             </div>
           </section>
           {isCards ? (
@@ -139,10 +141,8 @@ const AddBook = ({ inCards, showBooks }) => {
             open={popOpen}
             close={closePop}
             book={book}
-            title={title}
-            bookId={bookId}
-            showCards={showCards}
             addCard={addCard}
+            showCards={showCards}
           />
           {isCards && (
             <section className={styles.cardList}>

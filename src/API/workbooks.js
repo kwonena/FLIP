@@ -43,10 +43,10 @@ class WorkBooks {
   async addCard(question, result, bookId) {
     // 내 카드 만들기
     const response = await this.workBooks.post(`workbooks/${bookId}/cards`, {
-      qusetion: question,
+      question: question,
       result: result,
     });
-    return response.data.cards;
+    return response.data;
   }
 
   async updateCard(card) {
