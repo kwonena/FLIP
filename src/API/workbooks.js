@@ -34,10 +34,14 @@ class WorkBooks {
     });
   }
 
-  async showCards(id) {
+  async showCards(id, reverse) {
     // 내 카드 보기
     const response = await this.workBooks.get(`workbooks/${id}`);
-    return response.data.cards;
+    if (reverse) {
+      return [...response.data.cards].reverse();
+    } else {
+      return response.data.cards;
+    }
   }
 
   async addCard(question, result, bookId) {

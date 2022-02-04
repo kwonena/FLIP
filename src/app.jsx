@@ -43,10 +43,6 @@ function App() {
       });
   };
 
-  const updateCard = (card) => {
-    workBooks.modifyCard(card);
-  };
-
   return (
     <div className="app">
       <BrowserRouter>
@@ -68,10 +64,7 @@ function App() {
             path="/login"
             element={<Login setToken={setToken} setUser={setUser} />}
           />
-          <Route
-            path="/addBook"
-            element={<AddBook updateCard={updateCard} showBooks={showBooks} />}
-          />
+          <Route path="/addBook" element={<AddBook showBooks={showBooks} />} />
           <Route
             path="/quizSolve"
             element={<QuizSolve workBooks={workBooks} />}

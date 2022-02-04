@@ -18,6 +18,7 @@ const AddBook = ({ showBooks }) => {
   const [cardInBook, setCardsInBook] = useState([]);
   const [popOpen, setPopOpen] = useState(false);
   const [newBook, setNewBook] = useState("");
+  const [reverse, setReverse] = useState(true);
 
   useEffect(() => {
     if (isCards) {
@@ -25,11 +26,11 @@ const AddBook = ({ showBooks }) => {
     } else {
       setCardsInBook([]);
     }
-  }, []);
+  }, [reverse]);
 
   const showCards = (id) => {
     workBooks
-      .showCards(id) //
+      .showCards(id, reverse) //
       .then((items) => {
         setCardsInBook(items);
       });
@@ -51,7 +52,7 @@ const AddBook = ({ showBooks }) => {
     workBooks
       .updateCard(id, question, result) //
       .then(() => {
-        showCards(book.id);
+        showCards(book.id, reverse);
       })
       .catch(() => {
         alert("모든 정보를 입력해주세요!");
@@ -62,7 +63,7 @@ const AddBook = ({ showBooks }) => {
     workBooks
       .deleteCard(id) //
       .then(() => {
-        showCards(book.id);
+        showCards(book.id, reverse);
       });
   };
 
@@ -96,10 +97,13 @@ const AddBook = ({ showBooks }) => {
     setPopOpen(false);
   };
 
-  const onNewSort = () => {
-    const newCard = cardInBook.reverse();
-    setCardsInBook(newCard);
-    console.log(cardInBook);
+  // 최신순, 오래된순 변경
+  const handleOldest = () => {
+    setReverse(false);
+  };
+
+  const handleNewest = () => {
+    setReverse(true);
   };
 
   return (
@@ -131,10 +135,12 @@ const AddBook = ({ showBooks }) => {
             )}
 
             <div className={styles.buttons}>
-              <button className={styles.newBtn} onClick={onNewSort}>
+              <button className={styles.newBtn} onClick={handleNewest}>
                 최신순
               </button>
-              <button className={styles.oldBtn}>오래된순</button>
+              <button className={styles.oldBtn} onClick={handleOldest}>
+                오래된순
+              </button>
             </div>
           </section>
           {isCards ? (
@@ -152,7 +158,6 @@ const AddBook = ({ showBooks }) => {
             close={closePop}
             book={book}
             addCard={addCard}
-            showCards={showCards}
           />
           {isCards && (
             <section className={styles.cardList}>
