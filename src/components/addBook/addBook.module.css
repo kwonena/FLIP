@@ -54,7 +54,7 @@
 }
 
 .newBtn,
-.starBtn {
+.oldBtn {
     margin-right: 0.4rem;
     border-radius: 2rem;
     cursor: pointer;
@@ -67,7 +67,7 @@
     font-weight: bold;
 }
 
-.starBtn {
+.oldBtn {
     border: 2px solid #616161;
     color: #616161;
     font-weight: bold;

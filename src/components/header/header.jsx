@@ -1,16 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Auth from "../../API/auth";
 import styles from "./header.module.css";
 
-const Header = ({ login }) => {
+const Header = ({ login, setToken, setUser }) => {
   const navigate = useNavigate();
+  const auth = new Auth();
+  const onLogout = () => {
+    // 새로고침하면 원래대로 돌아옴
+    auth
+      .logOut() //
+      .then((response) => {
+        console.log(response);
+        setToken(null);
+        setUser(null);
+        navigate("/");
+      });
+  };
 
   return (
     <div className={styles.header}>
       <h1 className={styles.title} onClick={() => navigate("/")}>
         FLIP
       </h1>
-      {!login && (
+      {login ? (
+        <span className={styles.login} onClick={onLogout}>
+          로그아웃
+        </span>
+      ) : (
         <span className={styles.login} onClick={() => navigate("/login")}>
           로그인
         </span>

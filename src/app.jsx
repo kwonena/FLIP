@@ -54,7 +54,15 @@ function App() {
           <Route
             exact
             path="/"
-            element={<Main books={books} deleteBook={deleteBook} user={user} />}
+            element={
+              <Main
+                setToken={setToken}
+                setUser={setUser}
+                books={books}
+                deleteBook={deleteBook}
+                user={user}
+              />
+            }
           />
           <Route
             path="/login"

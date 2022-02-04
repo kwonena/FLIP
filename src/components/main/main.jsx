@@ -4,17 +4,17 @@ import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
 
-const Main = ({ books, deleteBook, user }) => {
+const Main = ({ setToken, setUser, books, deleteBook, user }) => {
   const navigate = useNavigate();
   const login = user ? true : false;
 
   return (
     <>
-      <Header login={login} />
+      <Header setToken={setToken} setUser={setUser} login={login} />
       <section className={styles.container}>
         <div className={styles.quiz}>
           <span className={styles.text}>
-            안녕하세요! {user ? `${user} 님` : ""}
+            안녕하세요! {user ? `${user}님` : ""}
           </span>
           <div className={styles.quizBox}>
             <span className={styles.quizText}>
@@ -27,7 +27,7 @@ const Main = ({ books, deleteBook, user }) => {
               onClick={() => {
                 if (!user) {
                   alert("로그인이 필요한 서비스입니다.");
-                } else if (books.length == 0) {
+                } else if (books.length === 0) {
                   alert("내 문제집이 없습니다!");
                 } else {
                   navigate("/quizSolve");
