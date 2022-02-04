@@ -96,6 +96,12 @@ const AddBook = ({ showBooks }) => {
     setPopOpen(false);
   };
 
+  const onNewSort = () => {
+    const newCard = cardInBook.reverse();
+    setCardsInBook(newCard);
+    console.log(cardInBook);
+  };
+
   return (
     <>
       <Header login={true} />
@@ -118,15 +124,17 @@ const AddBook = ({ showBooks }) => {
             </div>
             {isCards ? (
               <span className={styles.text}>
-                {book.cards.lenght}개의 카드를 학습 중이에요.
+                {book.cards.length}개의 카드를 학습 중이에요.
               </span>
             ) : (
               <span className={styles.text}>문제집 제목을 입력해주세요.</span>
             )}
 
             <div className={styles.buttons}>
-              <button className={styles.newBtn}>오래된순</button>
-              <button className={styles.starBtn}>최신순</button>
+              <button className={styles.newBtn} onClick={onNewSort}>
+                최신순
+              </button>
+              <button className={styles.oldBtn}>오래된순</button>
             </div>
           </section>
           {isCards ? (
