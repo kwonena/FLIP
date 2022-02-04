@@ -18,10 +18,10 @@ class Auth {
     return response;
   }
 
-  logOut() {
-    const response = this.auth.post("auth/logout");
-    return response;
-  }
+  // logOut() {
+  //   const response = this.auth.post("auth/logout");
+  //   return response;
+  // }
 
   signUp(email, password) {
     const response = this.auth.post("auth/signup", {
