@@ -28,10 +28,10 @@ const Book = ({ book, deleteBook }) => {
               });
             }}
           >
-            <i class="fas fa-edit fa-2x"></i>
+            <i className="fas fa-edit fa-2x"></i>
           </button>
           <button className={styles.bookDelete} onClick={onDeleteBook}>
-            <i class="fas fa-trash-alt fa-2x"></i>
+            <i className="fas fa-trash-alt fa-2x"></i>
           </button>
         </footer>
       </div>

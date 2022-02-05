@@ -24,10 +24,10 @@ const Card = ({ card, updateCard, deleteCard }) => {
                 setClicked(true);
               }}
             >
-              <i class="fas fa-edit fa-2x"></i>
+              <i className="fas fa-edit fa-2x"></i>
             </button>
             <button className={styles.cardDelete} onClick={onDeleteCard}>
-              <i class="fas fa-trash-alt fa-2x"></i>
+              <i className="fas fa-trash-alt fa-2x"></i>
             </button>
           </footer>
         </section>
