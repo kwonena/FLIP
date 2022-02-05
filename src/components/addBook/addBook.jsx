@@ -38,7 +38,11 @@ const AddBook = ({ showBooks }) => {
     workBooks
       .addCard(question, result, bookId) //
       .then((data) => {
-        setCardsInBook(data.cards);
+        if (reverse) {
+          setCardsInBook(data.cards.reverse());
+        } else {
+          setCardsInBook(data.cards);
+        }
       })
       .catch(() => {
         alert("모든 정보를 입력해주세요!");
