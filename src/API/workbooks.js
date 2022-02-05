@@ -1,14 +1,6 @@
-import axios from "axios";
-import { getCookie } from "../cookie";
-
 class WorkBooks {
-  constructor() {
-    this.workBooks = axios.create({
-      baseURL: "http://54.180.103.35:3000/api/v1",
-      headers: {
-        Authorization: `Bearer ${getCookie("accessToken")}`,
-      },
-    });
+  constructor(client) {
+    this.workBooks = client;
   }
 
   async showBooks(page) {

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Auth from "../../API/auth";
 import { setCookie } from "../../cookie";
 import Header from "../header/header";
 import styles from "./login.module.css";
 
 // header에서 로그인 안 보이게
-const Login = ({ setToken, setUser }) => {
-  const auth = new Auth();
+const Login = ({ auth, setToken, setUser }) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -64,14 +62,12 @@ const Login = ({ setToken, setUser }) => {
         <span className={styles.title}>LOGIN</span>
         <form className={styles.list} onSubmit={onLogin}>
           <input
-            // ref={emailRef}
             type="text"
             className={styles.email}
             placeholder="이메일"
             onChange={handleEmail}
           />
           <input
-            // ref={passwordRef}
             type="password"
             className={styles.password}
             placeholder="비밀번호"

@@ -8,14 +8,9 @@ import QuizSolve from "./components/quizSolve/quizSolve";
 import Quiz from "./components/quiz/quiz";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
-import WorkBooks from "./API/workbooks";
 import { getCookie } from "./cookie";
 
-function App() {
-  // const navigate = useNavigate();
-  // const token = getCookie("accessToken");
-  const workBooks = new WorkBooks();
-
+function App({ workBooks, auth }) {
   const [books, setBooks] = useState([]);
   const [token, setToken] = useState(getCookie("accessToken"));
   const [user, setUser] = useState(getCookie("userEmail"));
@@ -62,16 +57,21 @@ function App() {
           />
           <Route
             path="/login"
-            element={<Login setToken={setToken} setUser={setUser} />}
+            element={
+              <Login auth={auth} setToken={setToken} setUser={setUser} />
+            }
           />
-          <Route path="/addBook" element={<AddBook showBooks={showBooks} />} />
+          <Route
+            path="/addBook"
+            element={<AddBook workBooks={workBooks} showBooks={showBooks} />}
+          />
           <Route
             path="/quizSolve"
             element={<QuizSolve workBooks={workBooks} />}
           />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
-          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signUp" element={<SignUp auth={auth} />} />
         </Routes>
       </BrowserRouter>
     </div>

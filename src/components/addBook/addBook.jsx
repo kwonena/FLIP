@@ -4,10 +4,8 @@ import Header from "../header/header";
 import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
 import { useLocation, useNavigate } from "react-router-dom";
-import WorkBooks from "../../API/workbooks";
 
-const AddBook = ({ showBooks }) => {
-  const workBooks = new WorkBooks();
+const AddBook = ({ workBooks, showBooks }) => {
   const location = useLocation();
   const navigate = useNavigate();
 

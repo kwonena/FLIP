@@ -1,13 +1,6 @@
-import axios from "axios";
-
 class Auth {
-  constructor() {
-    this.auth = axios.create({
-      baseURL: "http://54.180.103.35:3000/api/v1",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  constructor(clientAuth) {
+    this.auth = clientAuth;
   }
 
   logIn(email, password) {

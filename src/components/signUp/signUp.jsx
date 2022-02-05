@@ -1,12 +1,10 @@
 import React, { useRef, useState } from "react";
 import styles from "./signUp.module.css";
 import Header from "../header/header";
-import Auth from "../../API/auth";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = (props) => {
+const SignUp = ({ auth }) => {
   const navigate = useNavigate();
-  const auth = new Auth();
 
   const emailRef = useRef();
   const passwordRef = useRef();
