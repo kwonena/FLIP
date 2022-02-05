@@ -45,6 +45,7 @@ const SignUp = (props) => {
 
   const setErrorMsg = (error) => {
     const data = error.response.data;
+    // eslint-disable-next-line default-case
     switch (data.statusCode) {
       case 400:
         if (data.message.length === 2) {

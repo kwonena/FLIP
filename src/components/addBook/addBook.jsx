@@ -13,8 +13,6 @@ const AddBook = ({ showBooks }) => {
 
   const { isCards, book } = location.state;
 
-  // console.log(isCards, book);
-
   const [cardInBook, setCardsInBook] = useState([]);
   const [popOpen, setPopOpen] = useState(false);
   const [newBook, setNewBook] = useState("");

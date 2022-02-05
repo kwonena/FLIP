@@ -45,7 +45,7 @@ const QuizSolve = ({ workBooks }) => {
   const handleNext = () => {
     const nextPage = page + 1;
     hiddenBooks(nextPage);
-    if (nextBooks.length == 0) {
+    if (nextBooks.length === 0) {
       alert("다음 문제집이 없어요😅");
       setNextDisable(true);
     } else {

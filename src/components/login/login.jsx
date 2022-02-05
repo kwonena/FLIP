@@ -30,6 +30,7 @@ const Login = ({ setToken, setUser }) => {
         backToMain(response.data.accessToken);
       })
       .catch((error) => {
+        // eslint-disable-next-line default-case
         switch (error.response.status) {
           case 401:
             alert("비밀번호를 확인해주세요");
