@@ -136,14 +136,30 @@ const AddBook = ({ showBooks }) => {
               <span className={styles.text}>문제집 제목을 입력해주세요.</span>
             )}
 
-            <div className={styles.buttons}>
-              <button className={styles.newBtn} onClick={handleNewest}>
-                최신순
-              </button>
-              <button className={styles.oldBtn} onClick={handleOldest}>
-                오래된순
-              </button>
-            </div>
+            {isCards && (
+              <div className={styles.buttons}>
+                <button
+                  className={
+                    reverse
+                      ? `${styles.sortBtn} ${styles.selectBtn}`
+                      : styles.sortBtn
+                  }
+                  onClick={handleNewest}
+                >
+                  최신순
+                </button>
+                <button
+                  className={
+                    !reverse
+                      ? `${styles.sortBtn} ${styles.selectBtn}`
+                      : styles.sortBtn
+                  }
+                  onClick={handleOldest}
+                >
+                  오래된순
+                </button>
+              </div>
+            )}
           </section>
           {isCards ? (
             <button className={styles.addCardBtn} onClick={openPop}>
