@@ -6,11 +6,30 @@ const EditCard = ({ open, setOpen, card, updateCard }) => {
   const [result, setResult] = useState(card.result);
 
   const handleQuestion = (event) => {
-    setQuestion(event.target.value);
+    const qLen = countLength(event.target.value);
+    if (qLen <= 70) {
+      setQuestion(event.target.value);
+    } else {
+      alert("70byte까지 입력 가능합니다!");
+    }
   };
 
   const handleResult = (event) => {
-    setResult(event.target.value);
+    const rLen = countLength(event.target.value);
+    if (rLen <= 70) {
+      setResult(event.target.value);
+    } else {
+      alert("70byte까지 입력 가능합니다!");
+    }
+  };
+
+  const countLength = (content) => {
+    var byte = 0;
+    for (var i = 0; i < content.length; i++) {
+      var currentByte = content.charCodeAt(i);
+      currentByte > 128 ? (byte += 2) : byte++;
+    }
+    return byte;
   };
 
   const editCard = () => {
