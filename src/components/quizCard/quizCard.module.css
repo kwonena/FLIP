@@ -26,22 +26,23 @@
 .cardBack {
     padding: 0.5em;
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.3em;
     text-align: center;
 }
 
 .cardName {
     color: makerBlue;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.3em;
     text-align: start;
 }
 
 .cardContent {
     padding: 0.5em;
     font-weight: bold;
-    font-size: 1.6em;
-    text-align: start;
+    font-size: 1.8em;
+    text-align: center;
+    padding-top: 5rem;
 }
 
 .cardPage {
