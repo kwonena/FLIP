@@ -10,16 +10,16 @@ const AddCard = ({ open, close, book, addCard }) => {
     if (qLen <= 70) {
       setQuestion(event.target.value);
     } else {
-      alert("70byte까지 입력 가능합니다!");
+      alert("문제는 70byte까지 입력 가능합니다!");
     }
   };
 
   const handleResult = (event) => {
     const rLen = countLength(event.target.value);
-    if (rLen <= 70) {
+    if (rLen <= 88) {
       setResult(event.target.value);
     } else {
-      alert("70byte까지 입력 가능합니다!");
+      alert("정답은 88byte까지 입력 가능합니다!");
     }
   };
 
