@@ -15,6 +15,8 @@ function App({ workBooks, auth }) {
   const [token, setToken] = useState(getCookie("accessToken"));
   const [user, setUser] = useState(getCookie("userEmail"));
 
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     if (token) {
       showBooks(1);
@@ -30,6 +32,16 @@ function App({ workBooks, auth }) {
         setBooks(items);
       });
   };
+
+  const showMoreBooks = () => {
+    workBooks
+      .showBooks(page) //
+      .then((items) => {
+        console.log(page);
+        setBooks([...books, ...items]);
+      });
+  };
+
   const deleteBook = (id) => {
     workBooks
       .deleteBook(id) //
@@ -47,11 +59,14 @@ function App({ workBooks, auth }) {
             path="/"
             element={
               <Main
+                page={page}
+                setPage={setPage}
                 setToken={setToken}
                 setUser={setUser}
                 books={books}
                 deleteBook={deleteBook}
                 user={user}
+                showMoreBooks={showMoreBooks}
               />
             }
           />

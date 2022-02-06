@@ -3,10 +3,49 @@ import { useNavigate } from "react-router-dom";
 import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const Main = ({ setToken, setUser, books, deleteBook, user }) => {
+const Main = ({
+  page,
+  setPage,
+  showMoreBooks,
+  setToken,
+  setUser,
+  books,
+  deleteBook,
+  user,
+}) => {
   const navigate = useNavigate();
   const login = user ? true : false;
+
+  // 무한 스크롤
+
+  const getMoreBooks = () => {
+    const next = page + 1;
+    setPage(next);
+    showMoreBooks();
+  };
+
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      getMoreBooks();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  // useEffect(()=>{
+
+  // })
 
   return (
     <>
