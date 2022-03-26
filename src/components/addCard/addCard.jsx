@@ -24,9 +24,9 @@ const AddCard = ({ open, close, book, addCard }) => {
   };
 
   const countLength = (content) => {
-    var byte = 0;
-    for (var i = 0; i < content.length; i++) {
-      var currentByte = content.charCodeAt(i);
+    let byte = 0;
+    for (let i = 0; i < content.length; i++) {
+      let currentByte = content.charCodeAt(i);
       currentByte > 128 ? (byte += 2) : byte++;
     }
     return byte;

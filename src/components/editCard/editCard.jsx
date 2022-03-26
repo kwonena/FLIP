@@ -5,6 +5,7 @@ const EditCard = ({ open, setOpen, card, updateCard }) => {
   const [question, setQuestion] = useState(card.question);
   const [result, setResult] = useState(card.result);
 
+  // 문제, 정답 입력 및 글자 수 제한
   const handleQuestion = (event) => {
     const qLen = countLength(event.target.value);
     if (qLen <= 70) {
@@ -23,10 +24,11 @@ const EditCard = ({ open, setOpen, card, updateCard }) => {
     }
   };
 
+  // 글자 수를 세는 함수
   const countLength = (content) => {
-    var byte = 0;
-    for (var i = 0; i < content.length; i++) {
-      var currentByte = content.charCodeAt(i);
+    let byte = 0;
+    for (let i = 0; i < content.length; i++) {
+      let currentByte = content.charCodeAt(i);
       currentByte > 128 ? (byte += 2) : byte++;
     }
     return byte;
@@ -36,12 +38,6 @@ const EditCard = ({ open, setOpen, card, updateCard }) => {
     updateCard(card.id, question, result);
     setOpen(false);
   };
-
-  // const onKeyPress = (event) => {
-  //   if (event.key === "Enter") {
-  //
-  //   }
-  // };
 
   return (
     <form className={open ? `styles.show` : `styles.hidden`}>

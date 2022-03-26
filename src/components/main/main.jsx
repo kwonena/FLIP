@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Books from "../mainBooks/books";
 import Header from "../header/header";
 import styles from "./main.module.css";
-import { useState } from "react";
 import { useEffect } from "react";
 
 const Main = ({
@@ -42,10 +41,6 @@ const Main = ({
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
-  // useEffect(()=>{
-
-  // })
 
   return (
     <>
