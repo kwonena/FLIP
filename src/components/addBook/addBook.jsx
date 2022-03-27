@@ -4,8 +4,9 @@ import Header from "../header/header";
 import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
 import { useLocation, useNavigate } from "react-router-dom";
+import * as workbooks from "../../API/workbooks.js";
 
-const AddBook = ({ workBooks, showBooks }) => {
+const AddBook = ({ showBooks }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const AddBook = ({ workBooks, showBooks }) => {
   }, [reverse]);
 
   const showCards = (id) => {
-    workBooks
+    workbooks
       .showCards(id, reverse) //
       .then((items) => {
         setCardsInBook(items);
@@ -33,7 +34,7 @@ const AddBook = ({ workBooks, showBooks }) => {
   };
 
   const addCard = (question, result, bookId) => {
-    workBooks
+    workbooks
       .addCard(question, result, bookId) //
       .then((data) => {
         if (reverse) {
@@ -49,7 +50,7 @@ const AddBook = ({ workBooks, showBooks }) => {
   };
 
   const updateCard = (id, question, result) => {
-    workBooks
+    workbooks
       .updateCard(id, question, result) //
       .then(() => {
         showCards(book.id, reverse);
@@ -60,7 +61,7 @@ const AddBook = ({ workBooks, showBooks }) => {
   };
 
   const deleteCard = (id) => {
-    workBooks
+    workbooks
       .deleteCard(id) //
       .then(() => {
         showCards(book.id, reverse);
@@ -78,7 +79,7 @@ const AddBook = ({ workBooks, showBooks }) => {
   };
 
   const createBook = () => {
-    workBooks
+    workbooks
       .addBook(newBook) //
       .then(() => {
         showBooks(1);

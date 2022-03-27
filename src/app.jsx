@@ -9,8 +9,9 @@ import Quiz from "./components/quiz/quiz";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
 import { getCookie } from "./cookie";
+import * as workbooks from "./API/workbooks";
 
-function App({ workBooks, auth }) {
+function App({ auth }) {
   const [books, setBooks] = useState([]);
   const [token, setToken] = useState(getCookie("accessToken"));
   const [user, setUser] = useState(getCookie("userEmail"));
@@ -26,7 +27,7 @@ function App({ workBooks, auth }) {
   }, [token]);
 
   const showBooks = (page) => {
-    workBooks
+    workbooks
       .showBooks(page) //
       .then((items) => {
         setBooks(items);
@@ -34,7 +35,7 @@ function App({ workBooks, auth }) {
   };
 
   const showMoreBooks = () => {
-    workBooks
+    workbooks
       .showBooks(page) //
       .then((items) => {
         console.log(page);
@@ -43,7 +44,7 @@ function App({ workBooks, auth }) {
   };
 
   const deleteBook = (id) => {
-    workBooks
+    workbooks
       .deleteBook(id) //
       .then(() => {
         showBooks(1);
@@ -76,14 +77,8 @@ function App({ workBooks, auth }) {
               <Login auth={auth} setToken={setToken} setUser={setUser} />
             }
           />
-          <Route
-            path="/addBook"
-            element={<AddBook workBooks={workBooks} showBooks={showBooks} />}
-          />
-          <Route
-            path="/quizSolve"
-            element={<QuizSolve workBooks={workBooks} />}
-          />
+          <Route path="/addBook" element={<AddBook showBooks={showBooks} />} />
+          <Route path="/quizSolve" element={<QuizSolve />} />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/signUp" element={<SignUp auth={auth} />} />

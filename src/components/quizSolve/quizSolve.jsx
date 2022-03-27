@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import QuizBooks from "../quizBooks/quiz_books";
 import styles from "./quizSolve.module.css";
+import * as workbooks from "../../API/workbooks.js";
 
 // header에서 로그인 안 보이게
-const QuizSolve = ({ workBooks }) => {
+const QuizSolve = () => {
   const [books, setBooks] = useState([]); // 화면에 보여지는 문제집
   const [nextBooks, setNextBooks] = useState([]); // 현재 보이는 다음 페이지 문제집
   const [prevDisable, setPrevDisable] = useState(false);
   const [nextDisable, setNextDisable] = useState(false);
 
   const showBooks = (page) => {
-    workBooks
+    workbooks
       .showBooks(page) //
       .then((items) => {
         const quizBooks = items.map((item) => {
@@ -22,7 +23,7 @@ const QuizSolve = ({ workBooks }) => {
       });
   };
   const hiddenBooks = (page) => {
-    workBooks
+    workbooks
       .showBooks(page + 1) //
       .then((items) => {
         setNextBooks(items);
