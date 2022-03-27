@@ -1,63 +1,65 @@
-class WorkBooks {
-  constructor(client) {
-    this.workBooks = client;
-  }
+import axios from "axios";
+import { getCookie } from "../cookie";
 
-  async showBooks(page) {
-    // 내 문제집 보기
-    const response = await this.workBooks.get("workbooks/me", {
-      params: {
-        page: page,
-        limit: 4,
-      },
-    });
-    return response.data.items;
-  }
+const client = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${getCookie("accessToken")}`,
+  },
+});
 
-  async deleteBook(id) {
-    // 내 문제집 삭제하기
-    await this.workBooks.delete(`workbooks/${id}`);
-  }
+// 내 문제집 보기
+export const showBooks = async (page) => {
+  const response = await client.get("workbooks/me", {
+    params: {
+      page: page,
+      limit: 4,
+    },
+  });
+  return response.data.items;
+};
 
-  async addBook(title) {
-    // 내 문제집 추가하기
-    await this.workBooks.post("workbooks", {
-      title: title,
-    });
-  }
+// 내 문제집 삭제하기
+export const deleteBook = async (id) => {
+  await client.delete(`workbooks/${id}`);
+};
 
-  async showCards(id, reverse) {
-    // 내 카드 보기
-    const response = await this.workBooks.get(`workbooks/${id}`);
-    if (reverse) {
-      return [...response.data.cards].reverse();
-    } else {
-      return response.data.cards;
-    }
-  }
+// 내 문제집 추가하기
+export const addBook = async (title) => {
+  await client.post("workbooks", {
+    title: title,
+  });
+};
 
-  async addCard(question, result, bookId) {
-    // 내 카드 만들기
-    const response = await this.workBooks.post(`workbooks/${bookId}/cards`, {
-      question: question,
-      result: result,
-    });
-    return response.data;
+// 내 카드 보기
+export const showCards = async (id, reverse) => {
+  const response = await client.get(`workbooks/${id}`);
+  if (reverse) {
+    return [...response.data.cards].reverse();
+  } else {
+    return response.data.cards;
   }
+};
 
-  async updateCard(id, question, result) {
-    // 내 카드 수정하기
-    const response = await this.workBooks.patch(`workbooks/cards/${id}`, {
-      question: question,
-      result: result,
-    });
-    return response;
-  }
+// 내 카드 만들기
+export const addCard = async (question, result, bookId) => {
+  const response = await client.post(`workbooks/${bookId}/cards`, {
+    question: question,
+    result: result,
+  });
+  return response.data;
+};
 
-  async deleteCard(id) {
-    // 내 카드 삭제하기
-    await this.workBooks.delete(`workbooks/cards/${id}`);
-  }
-}
+// 내 카드 수정하기
+export const updateCard = async (id, question, result) => {
+  const response = await client.patch(`workbooks/cards/${id}`, {
+    question: question,
+    result: result,
+  });
+  return response;
+};
 
-export default WorkBooks;
+// 내 카드 삭제하기
+export const deleteCard = async (id) => {
+  await client.delete(`workbooks/cards/${id}`);
+};
