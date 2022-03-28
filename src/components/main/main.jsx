@@ -48,7 +48,7 @@ const Main = ({
       <section className={styles.container}>
         <div className={styles.quiz}>
           <span className={styles.text}>
-            안녕하세요! {user ? `${user}님` : ""}
+            안녕하세요! {user ? `${user}님` : "로그인 해주세요:)"}
           </span>
           <div className={styles.quizBox}>
             <span className={styles.quizText}>
