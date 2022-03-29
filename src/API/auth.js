@@ -1,28 +1,24 @@
-class Auth {
-  constructor(clientAuth) {
-    this.auth = clientAuth;
-  }
+import axios from "axios";
 
-  logIn(email, password) {
-    const response = this.auth.post("auth/login", {
-      email: email,
-      password: password,
-    });
-    return response;
-  }
+const auth = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  // logOut() {
-  //   const response = this.auth.post("auth/logout");
-  //   return response;
-  // }
+export const logIn = (email, password) => {
+  const response = auth.post("auth/login", {
+    email: email,
+    password: password,
+  });
+  return response;
+};
 
-  signUp(email, password) {
-    const response = this.auth.post("auth/signup", {
-      email: email,
-      password: password,
-    });
-    return response;
-  }
-}
-
-export default Auth;
+export const signUp = (email, password) => {
+  const response = auth.post("auth/signup", {
+    email: email,
+    password: password,
+  });
+  return response;
+};
