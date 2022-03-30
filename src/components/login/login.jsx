@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { setCookie } from "../../cookie";
 import Header from "../header/header";
 import styles from "./login.module.css";
+import * as auth from "../../API/auth.js";
 
 // header에서 로그인 안 보이게
-const Login = ({ auth, setToken, setUser }) => {
+const Login = ({ setToken, setUser }) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import Auth from "../../API/auth";
 import { setCookie } from "../../cookie";
 import styles from "./header.module.css";
 
@@ -18,7 +17,7 @@ const Header = ({ login, setToken, setUser }) => {
     setToken("");
     setUser("");
   };
-  // const auth = new Auth();
+
   // const onLogout = () => {
   //   // 새로고침하면 원래대로 돌아옴
   //   auth

@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import styles from "./signUp.module.css";
 import Header from "../header/header";
 import { useNavigate } from "react-router-dom";
+import * as auth from "../../API/auth.js";
 
-const SignUp = ({ auth }) => {
+const SignUp = () => {
   const navigate = useNavigate();
 
   const emailRef = useRef();

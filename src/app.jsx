@@ -11,7 +11,7 @@ import SignUp from "./components/signUp/signUp";
 import { getCookie } from "./cookie";
 import * as workbooks from "./API/workbooks";
 
-function App({ auth }) {
+function App() {
   const [books, setBooks] = useState([]);
   const [token, setToken] = useState(getCookie("accessToken"));
   const [user, setUser] = useState(getCookie("userEmail"));
@@ -73,15 +73,13 @@ function App({ auth }) {
           />
           <Route
             path="/login"
-            element={
-              <Login auth={auth} setToken={setToken} setUser={setUser} />
-            }
+            element={<Login setToken={setToken} setUser={setUser} />}
           />
           <Route path="/addBook" element={<AddBook showBooks={showBooks} />} />
           <Route path="/quizSolve" element={<QuizSolve />} />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
-          <Route path="/signUp" element={<SignUp auth={auth} />} />
+          <Route path="/signUp" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </div>
