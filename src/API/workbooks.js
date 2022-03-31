@@ -42,8 +42,8 @@ export const showCards = async (id, reverse) => {
 };
 
 // 내 카드 만들기
-export const addCard = async (question, result, bookId) => {
-  const response = await client.post(`workbooks/${bookId}/cards`, {
+export const addCard = async (id, question, result) => {
+  const response = await client.post(`workbooks/${id}/cards`, {
     question: question,
     result: result,
   });

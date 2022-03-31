@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./addBook.module.css";
 import Header from "../header/header";
 import AddCard from "../addCard/addCard";
@@ -17,15 +17,7 @@ const AddBook = ({ showBooks }) => {
   const [newBook, setNewBook] = useState("");
   const [reverse, setReverse] = useState(true);
 
-  useEffect(() => {
-    if (isCards) {
-      showCards(book.id);
-    } else {
-      setCardsInBook([]);
-    }
-  }, [reverse]);
-
-  const showCards = (id) => {
+  const showCards = (id, reverse) => {
     workbooks
       .showCards(id, reverse) //
       .then((items) => {
@@ -33,9 +25,10 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
-  const addCard = (question, result, bookId) => {
+  // 카드 추가 함수
+  const addCard = (id, question, result) => {
     workbooks
-      .addCard(question, result, bookId) //
+      .addCard(id, question, result) // id == 문제집 id
       .then((data) => {
         if (reverse) {
           setCardsInBook(data.cards.reverse());
@@ -49,9 +42,10 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
+  // 카드 업데이트 함수
   const updateCard = (id, question, result) => {
     workbooks
-      .updateCard(id, question, result) //
+      .updateCard(id, question, result) // id == 카드 id
       .then(() => {
         showCards(book.id, reverse);
       })
@@ -60,27 +54,31 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
+  // 카드 삭제 함수
   const deleteCard = (id) => {
     workbooks
-      .deleteCard(id) //
+      .deleteCard(id) // id == 카드 id
       .then(() => {
         showCards(book.id, reverse);
       });
   };
 
+  // 문제집 제목을 저장하는 함수
   const handleTitle = (event) => {
     setNewBook(event.target.value);
   };
 
+  // Enter key로 문제집 등록 가능하게 만듦
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
       createBook();
     }
   };
 
+  // 새로운 문제집 생성 함수
   const createBook = () => {
     workbooks
-      .addBook(newBook) //
+      .addBook(newBook) // api에 문제집 제목 전달
       .then(() => {
         showBooks(1);
         navigate("/");
@@ -90,6 +88,7 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
+  // 카드 팝업 함수
   const openPop = () => {
     setPopOpen(true);
   };
@@ -98,7 +97,7 @@ const AddBook = ({ showBooks }) => {
     setPopOpen(false);
   };
 
-  // 최신순, 오래된순 변경
+  // 오래된순, 최신순으로 정렬
   const handleOldest = () => {
     setReverse(false);
   };
