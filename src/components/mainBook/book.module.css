@@ -1,3 +1,6 @@
+@value makerBlue from '../../common/colors.css';
+@value maxWidth from '../../common/size.css';
+
 .container {
     padding: 0.4rem;
     width: 50%;
@@ -45,7 +48,7 @@
 }
 
 .bookEdit:hover {
-    color: blue;
+    color: makerBlue;
 }
 
 .bookDelete {
@@ -54,4 +57,11 @@
 
 .bookDelete:hover {
     color: red;
+}
+
+@media screen and (max-width: maxWidth) {
+    .container {
+        width: 100%;
+        flex-direction: row;
+    }
 }

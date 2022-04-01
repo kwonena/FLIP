@@ -38,7 +38,6 @@ function App() {
     workbooks
       .showBooks(page) //
       .then((items) => {
-        console.log(page);
         setBooks([...books, ...items]);
       });
   };
