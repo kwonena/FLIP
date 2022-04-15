@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./addBook.module.css";
 import Header from "../header/header";
 import AddCard from "../addCard/addCard";
@@ -17,6 +17,16 @@ const AddBook = ({ showBooks }) => {
   const [newBook, setNewBook] = useState("");
   const [reverse, setReverse] = useState(true);
 
+  // main에서 문제집 추가로 addBook에 접근하면 isCards는 false,
+  // 이미 생성된 문제집의 수정 버튼으로 접근하면 isCards는 true
+  // useEffect를 통해 isCards가 true일 때, 문제집에 포함된 카드를 보여줌
+  useEffect(() => {
+    if (isCards) {
+      showCards(book.id, reverse);
+    }
+  });
+
+  // 카드 로딩 함수
   const showCards = (id, reverse) => {
     workbooks
       .showCards(id, reverse) //
@@ -63,31 +73,6 @@ const AddBook = ({ showBooks }) => {
       });
   };
 
-  // 문제집 제목을 저장하는 함수
-  const handleTitle = (event) => {
-    setNewBook(event.target.value);
-  };
-
-  // Enter key로 문제집 등록 가능하게 만듦
-  const onKeyPress = (event) => {
-    if (event.key === "Enter") {
-      createBook();
-    }
-  };
-
-  // 새로운 문제집 생성 함수
-  const createBook = () => {
-    workbooks
-      .addBook(newBook) // api에 문제집 제목 전달
-      .then(() => {
-        showBooks(1);
-        navigate("/");
-      })
-      .catch(() => {
-        alert("제목은 공백일 수 없습니다.");
-      });
-  };
-
   // 카드 팝업 함수
   const openPop = () => {
     setPopOpen(true);
@@ -104,6 +89,32 @@ const AddBook = ({ showBooks }) => {
 
   const handleNewest = () => {
     setReverse(true);
+  };
+
+  // isCards가 false일 때, 함수 목록
+  // 새로운 문제집 생성 함수
+  const createBook = () => {
+    workbooks
+      .addBook(newBook) // api에 문제집 제목 전달
+      .then(() => {
+        showBooks(1);
+        navigate("/");
+      })
+      .catch(() => {
+        alert("제목은 공백일 수 없습니다.");
+      });
+  };
+
+  // 문제집 제목을 저장하는 함수
+  const handleTitle = (event) => {
+    setNewBook(event.target.value);
+  };
+
+  // Enter key로 문제집 등록 가능하게 만듦
+  const onKeyPress = (event) => {
+    if (event.key === "Enter") {
+      createBook();
+    }
   };
 
   return (
