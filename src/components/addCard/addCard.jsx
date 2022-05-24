@@ -38,7 +38,7 @@ const AddCard = ({ open, close, book, addCard }) => {
   // };
 
   const onSave = () => {
-    addCard(question, result, book.id);
+    addCard(book.id, question, result);
     setQuestion("");
     setResult("");
     close();

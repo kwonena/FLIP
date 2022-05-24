@@ -9,7 +9,7 @@ import Quiz from "./components/quiz/quiz";
 import AddCard from "./components/addCard/addCard";
 import SignUp from "./components/signUp/signUp";
 import { getCookie } from "./cookie";
-import * as workbooks from "./API/workbooks";
+import * as workbooks from "./api/workbooks";
 
 function App() {
   const [books, setBooks] = useState([]);

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styles from "./signUp.module.css";
 import Header from "../header/header";
 import { useNavigate } from "react-router-dom";
-import * as auth from "../../API/auth.js";
+import * as auth from "../../api/auth.js";
 
 const SignUp = () => {
   const navigate = useNavigate();

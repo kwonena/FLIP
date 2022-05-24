@@ -19,7 +19,6 @@ const Main = ({
   const login = user ? true : false;
 
   // 무한 스크롤
-
   const getMoreBooks = () => {
     const next = page + 1;
     setPage(next);

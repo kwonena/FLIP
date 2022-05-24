@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { setCookie } from "../../cookie";
 import Header from "../header/header";
 import styles from "./login.module.css";
-import * as auth from "../../API/auth.js";
+import * as auth from "../../api/auth.js";
 
 // header에서 로그인 안 보이게
 const Login = ({ setToken, setUser }) => {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,6 +24,7 @@ const Login = ({ setToken, setUser }) => {
     auth
       .logIn(email, password) //
       .then((response) => {
+        console.log(response);
         backToMain(response.data.accessToken);
       })
       .catch((error) => {
@@ -51,7 +50,7 @@ const Login = ({ setToken, setUser }) => {
     setCookie("userEmail", email, {
       path: "/",
     });
-    navigate("/");
+    window.location.replace("/");
     setToken(token);
     setUser(email);
   };
