@@ -19,12 +19,14 @@ const Main = ({
   const login = user ? true : false;
 
   // 무한 스크롤
+  // page를 증가 시키며 showMoreBooks 호출
   const getMoreBooks = () => {
     const next = page + 1;
     setPage(next);
     showMoreBooks();
   };
 
+  // 스크롤이 바닥을 감지하면 getMoreBooks 함수를 호출
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
@@ -34,6 +36,7 @@ const Main = ({
     }
   };
 
+  // 스크롤 동작시 handleScroll 함수 호출
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {

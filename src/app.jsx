@@ -12,20 +12,21 @@ import { getCookie } from "./cookie";
 import * as workbooks from "./api/workbooks";
 
 function App() {
+  const [page, setPage] = useState(1);
   const [books, setBooks] = useState([]);
   const [token, setToken] = useState(getCookie("accessToken"));
   const [user, setUser] = useState(getCookie("userEmail"));
 
-  const [page, setPage] = useState(1);
-
+  // 로그인된 사용자가 있을 경우 사용자의 문제집 리스트를 보여줌
   useEffect(() => {
     if (token) {
-      showBooks(1);
+      showBooks(page);
     } else {
       setBooks([]);
     }
   }, [token]);
 
+  // 최초로 사용자가 보유한 문제집 로딩(한 페이지)
   const showBooks = (page) => {
     workbooks
       .showBooks(page) //
@@ -34,14 +35,17 @@ function App() {
       });
   };
 
+  // 스크롤 이벤트로 호출된 함수로,
+  // 다음 페이지 문제집을 불러오며 기존 문제집 아래에 보여줌
   const showMoreBooks = () => {
     workbooks
-      .showBooks(page) //
+      .showBooks(page + 1) //
       .then((items) => {
         setBooks([...books, ...items]);
       });
   };
 
+  // 문제집 삭제 함수
   const deleteBook = (id) => {
     workbooks
       .deleteBook(id) //
