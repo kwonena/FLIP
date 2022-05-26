@@ -1,5 +1,5 @@
 @value makerBlue from '../../common/colors.css';
-@value maxWidth from '../../common/size.css';
+@value booksControlMaxWidth from '../../common/size.css';
 
 .container {
     padding: 0.4rem;
@@ -59,7 +59,7 @@
     color: red;
 }
 
-@media screen and (max-width: maxWidth) {
+@media screen and (max-width: booksControlMaxWidth) {
     .container {
         width: 100%;
         flex-direction: row;

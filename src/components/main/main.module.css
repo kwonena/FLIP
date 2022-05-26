@@ -1,4 +1,5 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
+@value maxWidth from '../../common/size.css';
 
 .container {
     width: 100%;
@@ -7,9 +8,11 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 5em;
+    align-items: center;
 }
 
 .quiz {
+    width: 60%;
     padding-top: 3rem;
     display: flex;
     flex-direction: column;
@@ -18,16 +21,17 @@
 
 .text {
     margin-bottom: 1rem;
-    width: 60%;
+    width: 100%;
     margin-left: 3rem;
 }
 
 .quizBox {
-    position: relative;
     display: flex;
     flex-direction:row;
+    justify-content: space-between;
     align-items: center;
-    width: 60%;
+    padding: 0 3rem;
+    width: 100%;
     height: 14em;
     border-radius: 1.2em;
     background-color: white;
@@ -37,36 +41,32 @@
 }
 
 .quizText {
-    position: absolute;
-    left: 0;
-    margin-left: 4em;
     font-size: large;
 }
 
 .quizBtn {
-    position: absolute;
-    right: 0;
     width: 8em;
     height: 2.6em;
     border-radius: 0.8em;
     font-size: large;
-    margin-right: 4em;
     background-color: makerBlue;
     color: white;
     border: 0;
     cursor: pointer;
     outline: 0;
 }
+
 .study {
     margin-top: 3em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 60%;
 }
 
 .studyBox {
     position: relative;
-    width: 60%;
+    width: 100%;
 }
 
 .studyText {
@@ -91,10 +91,19 @@
 }
 
 .books {
-    width: 60%;
+    width: 100%;
 }
 
 .quizBtn:hover,
 .studyBtn:hover {
    opacity: 0.9;
+}
+
+@media screen and (max-width: maxWidth) {
+    .study {
+        width: 80%
+    }
+    .quiz {
+        width: 80%;
+    }
 }
