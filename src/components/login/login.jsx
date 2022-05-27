@@ -25,7 +25,7 @@ const Login = ({ setToken, setUser }) => {
       .logIn(email, password) //
       .then((response) => {
         console.log(response);
-        backToMain(response.data.accessToken);
+        backToMain(response.data.data.accessToken);
       })
       .catch((error) => {
         // eslint-disable-next-line default-case

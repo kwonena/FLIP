@@ -16,7 +16,7 @@ export const showBooks = async (page) => {
       limit: 4,
     },
   });
-  return response.data.items;
+  return response.data.data.items;
 };
 
 // 내 문제집 삭제하기
@@ -35,9 +35,9 @@ export const addBook = async (title) => {
 export const showCards = async (id, reverse) => {
   const response = await client.get(`workbooks/${id}`);
   if (reverse) {
-    return [...response.data.cards].reverse();
+    return [...response.data.data.cards].reverse();
   } else {
-    return response.data.cards;
+    return response.data.data.cards;
   }
 };
 
@@ -47,7 +47,7 @@ export const addCard = async (id, question, result) => {
     question: question,
     result: result,
   });
-  return response.data;
+  return response.data.data;
 };
 
 // 내 카드 수정하기
