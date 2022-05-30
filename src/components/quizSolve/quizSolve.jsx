@@ -116,7 +116,7 @@ const QuizSolve = () => {
     <>
       <Header login={true} />
       <section className={styles.container}>
-        <div className={styles.quizSetting}>
+        <section className={styles.quizBox}>
           <h1
             onClick={() => {
               console.log(page, nextBooks);
@@ -136,34 +136,34 @@ const QuizSolve = () => {
               selectBook={selectBook}
             />
           </div>
-        </div>
-        <div className={styles.quizSelect}>
-          몇 문제를 풀어볼까요?
-          <br />
-          <select
-            ref={selectRef}
-            className={styles.quizSelectBox}
-            onClick={handleRandomQuiz}
-          >
-            {handleQuizNum()}
-          </select>
-        </div>
-        <div className={styles.quizStart}>
-          <button
-            className={styles.quizStartBtn}
-            onClick={() =>
-              randomBook && randomBook.length !== 0
-                ? navigate("/quiz", {
-                    state: {
-                      quiz: randomBook,
-                    },
-                  })
-                : alert("선택된 문제가 없어요😅")
-            }
-          >
-            시작!
-          </button>
-        </div>
+          <div className={styles.quizSelect}>
+            몇 문제를 풀어볼까요?
+            <br />
+            <select
+              ref={selectRef}
+              className={styles.quizSelectBox}
+              onClick={handleRandomQuiz}
+            >
+              {handleQuizNum()}
+            </select>
+          </div>
+          <div className={styles.quizStart}>
+            <button
+              className={styles.quizStartBtn}
+              onClick={() =>
+                randomBook && randomBook.length !== 0
+                  ? navigate("/quiz", {
+                      state: {
+                        quiz: randomBook,
+                      },
+                    })
+                  : alert("선택된 문제가 없어요😅")
+              }
+            >
+              시작!
+            </button>
+          </div>
+        </section>
       </section>
     </>
   );
