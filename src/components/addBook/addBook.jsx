@@ -3,12 +3,11 @@ import styles from "./addBook.module.css";
 import Header from "../header/header";
 import AddCard from "../addCard/addCard";
 import Cards from "../cards/cards";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import * as workbooks from "../../api/workbooks.js";
 
-const AddBook = ({ showBooks }) => {
+const AddBook = ({ showBooks, page }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const { isCards, book } = location.state;
 
@@ -48,7 +47,7 @@ const AddBook = ({ showBooks }) => {
       })
       .catch(() => {
         alert("모든 정보를 입력해주세요!");
-        openPop();
+        openPopup();
       });
   };
 
@@ -74,11 +73,11 @@ const AddBook = ({ showBooks }) => {
   };
 
   // 카드 팝업 함수
-  const openPop = () => {
+  const openPopup = () => {
     setPopOpen(true);
   };
 
-  const closePop = () => {
+  const closePopup = () => {
     setPopOpen(false);
   };
 
@@ -97,10 +96,11 @@ const AddBook = ({ showBooks }) => {
     workbooks
       .addBook(newBook) // api에 문제집 제목 전달
       .then(() => {
-        showBooks(1);
-        navigate("/");
+        showBooks(page);
+        window.location.replace("/");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         alert("제목은 공백일 수 없습니다.");
       });
   };
@@ -171,7 +171,7 @@ const AddBook = ({ showBooks }) => {
             )}
           </section>
           {isCards ? (
-            <button className={styles.addCardBtn} onClick={openPop}>
+            <button className={styles.addCardBtn} onClick={openPopup}>
               새로운 카드 추가하기
             </button>
           ) : (
@@ -182,7 +182,7 @@ const AddBook = ({ showBooks }) => {
 
           <AddCard
             open={popOpen}
-            close={closePop}
+            close={closePopup}
             book={book}
             addCard={addCard}
           />
