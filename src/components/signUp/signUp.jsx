@@ -75,43 +75,45 @@ const SignUp = () => {
   return (
     <>
       <Header login={false} />
-      <form className={styles.container} onSubmit={onSignUp}>
-        <span className={styles.title}>SIGN UP</span>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="이메일"
-              ref={emailRef}
-              name="email"
-            />
-            <span className={styles.text}>{emailMsg}</span>
-          </li>
-          <li className={styles.item}>
-            <input
-              type="password"
-              className={styles.input}
-              placeholder="비밀번호"
-              ref={passwordRef}
-              name="password"
-            />
-            <span className={styles.text}>{passwordMsg}</span>
-          </li>
-          <li className={styles.item}>
-            <input
-              type="password"
-              className={styles.input}
-              placeholder="비밀번호 확인"
-              ref={passwordCheckRef}
-              name="passCheck"
-            />
-            <span className={styles.text}>{passwordCheckMsg}</span>
-          </li>
-        </ul>
-        <button type="submit" className={styles.button}>
-          가입하기
-        </button>
+      <form className={styles.singUp} onSubmit={onSignUp}>
+        <section className={styles.singUpBox}>
+          <span className={styles.title}>SIGN UP</span>
+          <ul className={styles.list}>
+            <li className={styles.item}>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="이메일"
+                ref={emailRef}
+                name="email"
+              />
+              <span className={styles.text}>{emailMsg}</span>
+            </li>
+            <li className={styles.item}>
+              <input
+                type="password"
+                className={styles.input}
+                placeholder="비밀번호"
+                ref={passwordRef}
+                name="password"
+              />
+              <span className={styles.text}>{passwordMsg}</span>
+            </li>
+            <li className={styles.item}>
+              <input
+                type="password"
+                className={styles.input}
+                placeholder="비밀번호 확인"
+                ref={passwordCheckRef}
+                name="passCheck"
+              />
+              <span className={styles.text}>{passwordCheckMsg}</span>
+            </li>
+          </ul>
+          <button type="submit" className={styles.button}>
+            가입하기
+          </button>
+        </section>
       </form>
     </>
   );
