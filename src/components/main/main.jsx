@@ -17,7 +17,7 @@ const Main = ({
 }) => {
   const navigate = useNavigate();
   const login = user ? true : false;
-  const userName = user.split("@");
+  const userName = user?.split("@");
 
   // 무한 스크롤
   // page를 증가 시키며 showMoreBooks 호출
