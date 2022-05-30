@@ -17,6 +17,7 @@ const Main = ({
 }) => {
   const navigate = useNavigate();
   const login = user ? true : false;
+  const userName = user.split("@");
 
   // 무한 스크롤
   // page를 증가 시키며 showMoreBooks 호출
@@ -50,7 +51,10 @@ const Main = ({
       <section className={styles.container}>
         <div className={styles.quiz}>
           <span className={styles.text}>
-            안녕하세요! {user ? `${user}님` : "로그인 해주세요:)"}
+            안녕하세요!{" "}
+            {user
+              ? `${userName[0]}님 FLIP과 함께 공부해볼까요?`
+              : "로그인 해주세요:)"}
           </span>
           <div className={styles.quizBox}>
             <span className={styles.quizText}>
