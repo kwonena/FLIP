@@ -59,32 +59,34 @@ const Login = ({ setToken, setUser }) => {
     <>
       <Header login={false} />
       <section className={styles.login}>
-        <span className={styles.title}>LOGIN</span>
-        <form className={styles.list} onSubmit={onLogin}>
-          <input
-            type="text"
-            className={styles.email}
-            placeholder="이메일"
-            onChange={handleEmail}
-          />
-          <input
-            type="password"
-            className={styles.password}
-            placeholder="비밀번호"
-            onChange={handlePassword}
-          />
-          <button type="submit" className={styles.button}>
-            로그인
-          </button>
+        <section className={styles.loginBox}>
+          <span className={styles.title}>LOGIN</span>
+          <form className={styles.list} onSubmit={onLogin}>
+            <input
+              type="text"
+              className={styles.email}
+              placeholder="이메일"
+              onChange={handleEmail}
+            />
+            <input
+              type="password"
+              className={styles.password}
+              placeholder="비밀번호"
+              onChange={handlePassword}
+            />
+            <button type="submit" className={styles.button}>
+              로그인
+            </button>
 
-          <div className={styles.singUp}>
-            <span>아직 계정이 없으시다면?</span>
+            <div className={styles.singUp}>
+              <span>아직 계정이 없으시다면?</span>
 
-            <Link to="/signUp">
-              <button className={styles.sign}>회원가입</button>
-            </Link>
-          </div>
-        </form>
+              <Link to="/signUp">
+                <button className={styles.sign}>회원가입</button>
+              </Link>
+            </div>
+          </form>
+        </section>
       </section>
     </>
   );
