@@ -6,7 +6,8 @@
     flex-direction: column;
     justify-content: space-between;
     height: 10em;
-    width: 13em;
+    width: 24%;
+    margin: 1%;
     border-radius: 1.2em;
     background-color: white;
     box-shadow: 4px 8px 14px 0px rgba(0, 0, 0, 0.45);

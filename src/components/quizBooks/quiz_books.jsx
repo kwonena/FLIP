@@ -26,7 +26,7 @@ const QuizBooks = ({
     <section className={styles.container}>
       <button
         disabled={prevDisable}
-        className={!prevDisable ? styles.prevBtn : styles.disableBtn}
+        className={!prevDisable ? styles.prevBtn : styles.disablePrevBtn}
         onClick={handlePrev}
       >
         <i className="fas fa-chevron-left"></i>
@@ -44,7 +44,7 @@ const QuizBooks = ({
       </ul>
       <button
         disabled={nextDisable}
-        className={!nextDisable ? styles.nextBtn : styles.disableBtn}
+        className={!nextDisable ? styles.nextBtn : styles.disableNextBtn}
         onClick={handleNext}
       >
         <i className="fas fa-chevron-right"></i>
