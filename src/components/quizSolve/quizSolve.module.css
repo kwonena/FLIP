@@ -1,4 +1,5 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
+@value mobileVersionWidth from '../../common/size.css';
 
 .container {
     width: 100%;
@@ -29,10 +30,6 @@
     padding: 0.5rem;
 }
 
-.quizStart {
-    text-align: center;
-}
-
 .quizStartBtn {
     padding: 0.3em;
     margin-top: 4rem;
@@ -42,4 +39,22 @@
     color: white;
     border-radius: 0.5em;
     font-size: 1.5rem;
+}
+
+@media screen and (max-width: mobileVersionWidth) {
+    .container {
+        padding-top: 1rem;
+    }
+
+    .quizBox {
+        width: 90%;
+    }
+
+    .quizStartBtn {
+        margin-bottom: 2rem;
+    }
+
+    .quizSelect {
+        margin-top: 1.5rem;
+    }
 }

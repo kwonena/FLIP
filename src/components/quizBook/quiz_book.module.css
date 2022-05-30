@@ -1,4 +1,5 @@
 @value makerBlue from '../../common/colors.css';
+@value mobileVersionWidth from '../../common/size.css';
 
 .item {
     padding: 1.8rem;
@@ -16,12 +17,13 @@
     transition: transform 250ms ease-in;
 }
 
-.test {
-    border: 0.3em solid makerBlue;
-}
 .item:hover {
     cursor: pointer;
     transform: scale(1.02);
+}
+
+.clickedItem {
+    border: 0.3em solid makerBlue;
 }
 
 .bookTitle {
@@ -34,14 +36,15 @@
     color: darkgrey;
 }
 
-.bookFooter {
-    text-align: end;
-}
-
 i {
     cursor: pointer;
 }
 
-.bookDelete {
-    color: red;
+@media screen and (max-width: mobileVersionWidth) {
+    .item {
+        width: 100%;
+        padding: 1.3rem;
+        height: 6rem;
+        -webkit-box-shadow: 2px 8px 14px 0px rgba(0, 0, 0, 0.45);
+    }
 }

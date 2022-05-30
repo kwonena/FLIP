@@ -10,7 +10,9 @@ const QuizBook = ({ book, selectBook, clickedBook, selected }) => {
     <>
       <li
         onClick={setBook}
-        className={selected ? `${styles.item} ${styles.test}` : styles.item}
+        className={
+          selected ? `${styles.item} ${styles.clickedItem}` : styles.item
+        }
       >
         <div className={styles.bookTitle}>{book.title}</div>
         <div className={styles.bookCount}>{book.cards.length}개의 카드</div>

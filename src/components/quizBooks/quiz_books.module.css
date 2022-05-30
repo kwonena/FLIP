@@ -1,4 +1,5 @@
 @value makerBlue from '../../common/colors.css';
+@value mobileVersionWidth from '../../common/size.css';
 
 .container {
     width: 100%;
@@ -50,4 +51,12 @@
 .disablePrevBtn {
     position: absolute;
     left: 0;
+}
+
+@media screen and (max-width: mobileVersionWidth) {
+    .list {
+        width: 73%;
+        flex-direction: column;
+        margin-top: 1.5rem;
+    }
 }

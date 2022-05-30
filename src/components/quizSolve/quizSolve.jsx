@@ -31,8 +31,8 @@ const QuizSolve = () => {
   };
 
   useEffect(() => {
-    showBooks(1);
-    hiddenBooks(1);
+    showBooks(page);
+    hiddenBooks(page);
   }, []);
 
   const navigate = useNavigate();
@@ -147,22 +147,20 @@ const QuizSolve = () => {
               {handleQuizNum()}
             </select>
           </div>
-          <div className={styles.quizStart}>
-            <button
-              className={styles.quizStartBtn}
-              onClick={() =>
-                randomBook && randomBook.length !== 0
-                  ? navigate("/quiz", {
-                      state: {
-                        quiz: randomBook,
-                      },
-                    })
-                  : alert("선택된 문제가 없어요😅")
-              }
-            >
-              시작!
-            </button>
-          </div>
+          <button
+            className={styles.quizStartBtn}
+            onClick={() =>
+              randomBook && randomBook.length !== 0
+                ? navigate("/quiz", {
+                    state: {
+                      quiz: randomBook,
+                    },
+                  })
+                : alert("선택된 문제가 없어요😅")
+            }
+          >
+            시작!
+          </button>
         </section>
       </section>
     </>

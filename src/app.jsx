@@ -78,7 +78,10 @@ function App() {
             path="/login"
             element={<Login setToken={setToken} setUser={setUser} />}
           />
-          <Route path="/addBook" element={<AddBook showBooks={showBooks} />} />
+          <Route
+            path="/addBook"
+            element={<AddBook page={page} showBooks={showBooks} />}
+          />
           <Route path="/quizSolve" element={<QuizSolve />} />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/quiz" element={<Quiz />} />
