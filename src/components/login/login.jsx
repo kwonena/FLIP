@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { setCookie } from "../../cookie";
 import Header from "../header/header";
 import styles from "./login.module.css";
-import * as auth from "../../api/auth.js";
+import * as auth from "../../API/auth.js";
 
 // header에서 로그인 안 보이게
 const Login = ({ setToken, setUser }) => {

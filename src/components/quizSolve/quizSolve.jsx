@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import QuizBooks from "../quizBooks/quiz_books";
 import styles from "./quizSolve.module.css";
-import * as workbooks from "../../api/workbooks.js";
+import * as workbooks from "../../API/workbooks.js";
 
 // header에서 로그인 안 보이게
 const QuizSolve = () => {
