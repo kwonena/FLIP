@@ -1,4 +1,5 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
+@value mobileVersionWidth from '../../common/size.css';
 
 .card {
   width: 60%;
@@ -62,6 +63,7 @@
   transform: scale(1.02);
   color: red;
 }
+
 .textBox {
   flex-direction: column;
 }
@@ -107,4 +109,30 @@
 
 .addBtn:hover {
   opacity: 0.9;
+}
+
+/* 모바일 버전 */
+@media screen and (max-width: mobileVersionWidth) {
+  .card {
+    width: 90%;
+    height: 75vh;
+    top: 16%;
+    left: 5%;
+  }
+
+  .titleBox {
+    margin-top: 1rem;
+  }
+
+  .closeBtn {
+    right: -5%;
+  }
+
+  .textarea {
+    height: 8rem;
+  }
+  .addBtn {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
 }

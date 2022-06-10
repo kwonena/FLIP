@@ -43,16 +43,14 @@
 .bookDelete:hover {
     transform: scale(1.02);
 }
-.bookEdit {
+
+.bookEdit,
+.bookDelete {
     background-color: white;
 }
 
 .bookEdit:hover {
     color: makerBlue;
-}
-
-.bookDelete {
-    background-color: white;
 }
 
 .bookDelete:hover {

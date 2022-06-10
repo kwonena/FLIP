@@ -51,10 +51,9 @@ const Main = ({
       <section className={styles.container}>
         <div className={styles.quiz}>
           <span className={styles.text}>
-            안녕하세요!{" "}
             {user
-              ? `${userName[0]}님 FLIP과 함께 공부해볼까요?`
-              : "로그인 해주세요:)"}
+              ? `${userName[0]}님! FLIP과 함께 공부해볼까요?😉`
+              : "안녕하세요! 로그인 해주세요:)"}
           </span>
           <div className={styles.quizBox}>
             <span className={styles.quizText}>

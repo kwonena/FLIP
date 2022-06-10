@@ -1,10 +1,9 @@
 @value makerBlue,makerBackground from '../../common/colors.css';
-@value maxWidth from '../../common/size.css';
+@value maxWidth,mobileVersionWidth from '../../common/size.css';
 
 .container {
     width: 100%;
     height: 100vh;
-    background-color: makerBackground;
     display: flex;
     flex-direction: column;
     margin-bottom: 5em;
@@ -27,7 +26,7 @@
 
 .quizBox {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
@@ -65,29 +64,32 @@
 }
 
 .studyBox {
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    height: 3rem;
+    margin-bottom: -1rem;
 }
 
 .studyText {
     font-size: x-large;
     font-weight: bolder;
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
 }
 
 .studyBtn {
-    position: absolute;
-    right: 0;
-    width: 8em;
-    height: 2.5em;
-    border-radius: 0.8em;
+    width: 9rem;
+    height: 2.8rem;
+    border-radius: 0.8rem;
     font-size: large;
-    margin-right: 0.5em;
+    margin-right: 0.5rem;
     background-color: makerBlue;
     color: white;
     border: 0;
-    cursor: pointer;
     outline: 0;
+    cursor: pointer;
 }
 
 .books {
@@ -105,5 +107,46 @@
     }
     .quiz {
         width: 80%;
+    }
+}
+
+/* 모바일 버전 */
+@media screen and (max-width: mobileVersionWidth) {
+    .quiz{
+        width: 87%;
+    }
+
+    .text {
+        width: 100%;
+        text-align: center;
+        margin: 0 0 0.8rem;
+    }
+
+    .quizBox {
+        flex-direction: column;
+        justify-content: center;
+        height: 12rem;
+        padding: 0 2rem;
+    }
+
+    .quizBtn {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .study {
+        width: 90%;
+    }
+
+    .studyBox {
+        align-items: flex-start;
+    }
+
+    .studyBtn {
+        margin-top: -0.3rem;
+    }
+
+    .books {
+        margin-top: -0.8rem;
     }
 }
